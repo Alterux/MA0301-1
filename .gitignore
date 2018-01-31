@@ -11,6 +11,9 @@
 *.cb
 *.cb2
 
+## Must manually add pdf files to avoid overriding existing ones
+*.pdf 
+
 ## Intermediate documents:
 *.dvi
 *.xdv
