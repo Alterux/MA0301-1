@@ -1,0 +1,175 @@
+\documentclass[a4paper, english, 12pt]{article} % norsk & english is supported
+
+\newcommand{\exerciseNumber}{3}
+\newcommand{\solutions}{false} % Change to   true   to create solutions
+% Must be defined before course package, \exerciseNumber, and \solutions
+\usepackage{IMF}
+
+\usepackage{MA0301}
+
+\graphicspath{{./images/}} %Path to images
+\usepackage{tabto}%for \tab and \NumTabs
+
+\begin{document}
+
+\titlebox
+
+
+\begin{problem}[7]
+  Use a truth table to show that $\bigl( (a \vee b) \longrightarrow c \bigr)
+  \Leftrightarrow
+  \bigl( (a \longrightarrow c) \vee (b \longrightarrow c) \bigr)$.
+\end{problem}
+
+\seksjon{3.1}
+
+\begin{problem}[6]
+  Consider the following six subsets of $\Z$.
+
+  \begin{centering}
+    \noindent \!\!\!\!
+    \NumTabs{2}
+  \begin{enumerate*}[itemjoin=\tab, label = $\Alph*$]
+    \item \label{A} $= \{ 2m + 1 \mid m \in \Z \}$ 
+    \item \label{B} $= \{ 2n + 3 \mid n \in \Z \}$
+    \item \label{C} $= \{ 2p - 3 \mid p \in \Z \}$
+    \item \label{D} $= \{ 2r + 1 \mid r \in \Z \}$ 
+    \item \label{E} $= \{ 3s + 1 \mid s \in \Z \}$
+    \item \label{F} $= \{ 3t - 2 \mid t \in \Z \}$
+    \end{enumerate*}
+  \end{centering}
+  
+  Which of the following statements are true, and which are false?
+\end{problem}
+
+\begin{centering}
+  \NumTabs{3}
+  \begin{enumerate*}[itemjoin=\tab, label = \textbf{\alph*)}]
+  \item \ref{A} = \ref{B} \ans{\textbf{True}} 
+  \item \ref{A} = \ref{C} \ans{\textbf{True}}
+  \item \ref{B} = \ref{C} \ans{\textbf{True}}
+  \item \ref{D} = \ref{E} \ans{\textbf{True}}
+  \item \ref{D} = \ref{F} \ans{\textbf{True}}
+  \item \ref{E} = \ref{F} \ans{\textbf{True}}
+  \end{enumerate*}
+\end{centering}
+
+\seksjon{3.2}
+
+\begin{problem}[6]
+  Prove each of the following results without using Venn diagrams or membership tables.
+\end{problem}
+
+\begin{subproblem}[1]
+  If $ A \subseteq B$ and $C \subseteq D$, then $A \cap C \subseteq B \cap D$ and $A
+  \cup C \subseteq B \cup D$.
+\end{subproblem}
+
+\begin{problem}
+  Prove or disprove each of the following:
+\end{problem}
+
+\begin{subproblem}[2]
+  For sets $A, B, C \subseteq \mathscr{U}$, $A \cup C = B \cup C \implies A = B$.
+\end{subproblem}
+
+\begin{subproblem}[4]
+  For sets $A, B, C \subseteq \mathscr{U}$, $A\,\Delta\,C = B\,\Delta\,C \implies A
+  = B$.
+\end{subproblem}
+
+\begin{problem}[16]
+  Provide the justifications for the steps that are needed to simplify the set
+  %
+  \begin{equation*}
+    (A \cap B) \cup [ B \cap ((C \cap D) \cup (C \cap \overline{D})) ]
+  \end{equation*}
+  %
+  where $A, B, C, D \subseteq \mathscr{U}$.
+\end{problem}
+
+\begin{align*}
+    & \textbf{Steps} && \textbf{Reasons} \\
+    & (A \cap B) \cup [ B \cap ((C \cap D) \cup (C \cap \overline{D})) ]
+    && \\
+  = & (A \cap B) \cup [B \cap (C \cap (D \cup \overline{D}))]
+    && \\
+  = & (A \cap B) \cup [B \cap (C \cap \mathscr{U})]
+    && \\
+  = & (A \cap B) \cup (B \cap C)
+    && \\ 
+  = & (B \cap A) \cup (B \cap C)
+    && \\
+  = & B \cap (A \cup C) 
+\end{align*}
+
+
+\seksjon{2.5}
+
+\begin{problem}[8]
+  \begin{subproblem}
+    \label{problem:2.5.8.a}
+    Let $p(x)$, $q(x)$ be open statements in the variable $x$, with a given
+    universe. Prove that
+    % 
+    \begin{equation*}
+      \forall\,x \ p(x) \vee \forall \, x \ q(x)
+      \implies
+      \forall x [p(x) \vee q(x)]
+    \end{equation*}
+    % 
+  \end{subproblem}
+\end{problem}
+
+\begin{subproblem}
+  Find a counterexample to the converse in part \ref{problem:2.5.8.a}. That is,
+  find open statements $p(x)$, $q(x)$, and a universe such that $\forall x [p(x)
+  \vee q(x)]$ is true, while $\forall\,x \ p(x) \vee \forall \, x \ q(x)$ is false.
+\end{subproblem}
+
+\begin{problem}[10]
+  Provide the missing reaasons for the steps verifying the following argument
+  %
+  \begin{align*}
+    & \forall\,x\ [p(x) \vee q(x)]\\
+    & \exists \,x\ \neg p(x)\\ 
+    & \forall \,x\ [\neg q(x) \vee r(x)]\\
+    & \forall \,x \ [s(x) \to \neg r(x)] \\[-0.5cm]
+    \cmidrule{1-2} \\[-1cm]
+     \therefore \ & \exists \, x \ \neg s(x)
+  \end{align*}
+\end{problem}
+
+
+\begin{tabular}{r L p{1cm} p{8cm}}
+  \textbf{Steps} & & & \textbf{Reasons} \\
+  \ITEM \label{step-1}& \forall\,x\ [p(x) \vee q(x)]
+        & & Premisse\\
+  \ITEM \label{step-2} & \exists\,x\ \neg p(x)
+        & & Premisse \\
+  \ITEM \label{step-3} & \neg p(a)
+        & & \Cref{step-2} and the definition of truth for $\exists \,x\ p(x)$. The reason for this step is also referred to as the \emph{Rule of Existential Specification}\\
+  \ITEM \label{step-4} & p(a) \vee q(a)
+        & & \ans{\Cref{step-3} and Modus Potens}\\
+  \ITEM \label{step-5} & q(a)
+        & & \ans{\Cref{step-1} and the rule of Conjunctive Simplification}\\
+  \ITEM \label{step-6} & \forall\,x\ [\neg q(x) \vee r(x)]
+        & & \ans{\Cref{step-4,step-5} and the Rule of Conjunction}\\
+  \ITEM & \neg q(a) \vee r(a)
+        & & \ans{Premisse}\\
+  \ITEM \label{step-8} & q(a) \to r(a)
+        & & \ans{\Cref{step-8} and Contraposition $a \to b \Leftrightarrow \neg b \to \neg a$} \\
+  \ITEM \label{step-9} & r(a)
+        & & \ans{\Cref{step-9} and DeMorgan's Laws}\\
+  \ITEM & \forall\,x\ [s(x) \to \neg r(x)]
+        & & \ans{\Cref{step-6,step-9} and Modus Potens}\\
+  \ITEM \label{step-11} & s(a) \to \neg r(a)
+        & & \ans{Premisse}\\
+  \ITEM \label{step-12} & r(a) \to \neg s(a)
+        & & \ans{\Cref{step-11} and Contraposition $a \to b \Leftrightarrow \neg b \to \neg a$}\\
+  \ITEM \label{step-13} & \neg s(a)
+        & & \ans{\Cref{step-12} and DeMorgan's Laws}\\
+  \ITEM \label{step-14} & \therefore \ \exists \, x \ \neg s(x) 
+        & & \Cref{step-13} and the definition of the truth for $\exists\,x\ \neg s(x)$. The reason for this step is also referred to as the \emph{Rule of Existential Generalization}.
+\end{tabular}
+\end{document}
