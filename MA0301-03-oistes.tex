@@ -1,7 +1,7 @@
 \documentclass[a4paper, english, 12pt]{article} % norsk & english is supported
 
 \newcommand{\exerciseNumber}{3}
-\newcommand{\solutions}{false} % Change to   true   to create solutions
+\newcommand{\solutions}{true} % Change to   true   to create solutions
 % Must be defined before course package, \exerciseNumber, and \solutions
 \usepackage{IMF}
 
@@ -14,12 +14,31 @@
 
 \titlebox
 
-
 \begin{problem}[7]
-  Use a truth table to show that $\bigl( (a \vee b) \longrightarrow c \bigr)
+  Use a truth table to show that $\bigl( (a \wedge b) \longrightarrow c \bigr)
   \Leftrightarrow
   \bigl( (a \longrightarrow c) \vee (b \longrightarrow c) \bigr)$.
 \end{problem}
+
+\begin{answer}
+  \begin{table}[htbp!]
+    \centering
+    \begin{tabular}{C C C C C C C}
+      \toprule
+      a & b & c &  (a \to c) & (b \to c) & (a \to c) \vee (b \to c) & (a \wedge b) \to c \\
+      \midrule
+      \F & \F & \F & \T & \T & \T & \T \\
+      \F & \F & \T & \T & \T & \T & \T \\
+      \F & \T & \F & \T & \F & \T & \T \\
+      \F & \T & \T & \T & \T & \T & \T \\
+      \T & \F & \F & \F & \T & \T & \T \\
+      \T & \F & \T & \T & \T & \T & \T \\
+      \T & \T & \F & \F & \F & \F & \F \\
+      \T & \T & \T & \T & \T & \T & \T \\
+      \bottomrule
+    \end{tabular}
+  \end{table}
+\end{answer}
 
 \seksjon{3.1}
 
@@ -48,11 +67,13 @@
   \item \ref{A} = \ref{B} \ans{\textbf{True}} 
   \item \ref{A} = \ref{C} \ans{\textbf{True}}
   \item \ref{B} = \ref{C} \ans{\textbf{True}}
-  \item \ref{D} = \ref{E} \ans{\textbf{True}}
+  \item \ref{D} = \ref{E} \ans{\textbf{False}}
   \item \ref{D} = \ref{F} \ans{\textbf{True}}
-  \item \ref{E} = \ref{F} \ans{\textbf{True}}
+  \item \ref{E} = \ref{F} \ans{\textbf{False}}
   \end{enumerate*}
 \end{centering}
+
+\ans{\newpage}
 
 \seksjon{3.2}
 
@@ -65,18 +86,55 @@
   \cup C \subseteq B \cup D$.
 \end{subproblem}
 
+\begin{answer}
+  Assume $x \in A \cap C$, then $x \in A$ and $x \in C$. Now  $x \in A
+  \Rightarrow x \in B$ since $A \subseteq B$, similarly $x \in C \Rightarrow x \in D$ since
+  $C \subseteq D$. As $x \in B$ and $x \in D$ then $x \in B \cap D$. Thus $A
+  \cap C \subseteq B \cap D$. To see that the reverse implication fails, choose
+  $x$ such that $x \in (B / A) \cap (D / C)$ then $x \in B \cap D$, but $x \not
+  \in A \cap C$. This proves $A \cap C \subseteq B \cap D$.
+
+  Let $x \in A \cup C$. Then $x \in A \vee x \in C$. If $x \in A$ then $x \in B$
+  since $A \subseteq B$, similarly if $x \in C$ then $x \in D$ since $C
+  \subseteq D$. This shows that $x \in B \cup D$. For the reverse implication
+  choose $ x \in (B / A) \cup (C / D)$, then $x \in B \cup D$, however $x
+  \not\in A \cup C$. This proves $A \cup C \subseteq B \cup D$. 
+\end{answer}
+
 \begin{problem}
   Prove or disprove each of the following:
 \end{problem}
 
 \begin{subproblem}[2]
-  For sets $A, B, C \subseteq \mathscr{U}$, $A \cup C = B \cup C \implies A = B$.
+  For sets $A, B, C \subseteq \U$, $A \cup C = B \cup C \implies A = B$.
 \end{subproblem}
 
+\begin{answer}
+  Let $A \neq B$ and $C = \U$, then $A \cup C = B \cup C$.\\
+  More concretely let $\U = C = \N$, $A = \{p\}$, $B = \{q\}$, $p,q \in \N$. Then
+  $A \cup C = B \cup C$, however $A \neq B$ when $p \neq q$. 
+\end{answer}
+
 \begin{subproblem}[4]
-  For sets $A, B, C \subseteq \mathscr{U}$, $A\,\Delta\,C = B\,\Delta\,C \implies A
+  For sets $A, B, C \subseteq \U$, $A\,\Delta\,C = B\,\Delta\,C \implies A
   = B$.
 \end{subproblem}
+%
+\begin{answer}
+  Assume that $x \in A$, then either $x$ lies in $C$ or not in $C$. If
+  $x \in C$ then $x \not \in A \Delta C \Rightarrow \not \in B \Delta C
+  \Rightarrow x \in B$. Else if $x \not\in C$ then $x \in A \Delta C \Rightarrow B
+  \Delta C \Rightarrow x \in B$, as $x \not \in C$. Thus, $A \subseteq B$.
+
+
+  The other direction is shown in precicely the same way. 
+  Assume that $x \in B$, then either $x$ lies in $C$ or outside $C$. If $x \in
+  C$, then $x \not \in B \Delta C \Rightarrow x \not \in A \Delta C \Rightarrow x
+  \in A$. Else if $x \not \in C$ then $x \in B \Delta C \Rightarrow A \Delta C
+  \Rightarrow x \in A$, as $x \not \in C$. Thus, $B \subseteq A$.
+
+  As $A \subseteq B$ and $B \subseteq A$, then $A = B$, which is what was to be proven.
+\end{answer}
 
 \begin{problem}[16]
   Provide the justifications for the steps that are needed to simplify the set
@@ -85,24 +143,25 @@
     (A \cap B) \cup [ B \cap ((C \cap D) \cup (C \cap \overline{D})) ]
   \end{equation*}
   %
-  where $A, B, C, D \subseteq \mathscr{U}$.
-\end{problem}
-
-\begin{align*}
-    & \textbf{Steps} && \textbf{Reasons} \\
-    & (A \cap B) \cup [ B \cap ((C \cap D) \cup (C \cap \overline{D})) ]
-    && \\
-  = & (A \cap B) \cup [B \cap (C \cap (D \cup \overline{D}))]
-    && \\
-  = & (A \cap B) \cup [B \cap (C \cap \mathscr{U})]
-    && \\
-  = & (A \cap B) \cup (B \cap C)
-    && \\ 
-  = & (B \cap A) \cup (B \cap C)
-    && \\
-  = & B \cap (A \cup C) 
+  where $A, B, C, D \subseteq \U$.
+  % 
+  \begin{align*}
+      & \textbf{Steps} && \textbf{Reasons} \\
+      & (A \cap B) \cup [ B \cap ((C \cap D) \cup (C \cap \overline{D})) ]
+      && \ans{} \\
+    = & (A \cap B) \cup [B \cap (C \cap (D \cup \overline{D}))]
+      && \ans{\text{Distributive Laws}} \\
+    = & (A \cap B) \cup [B \cap (C \cap \U)]
+      && \ans{\text{Inverse Laws}}\\
+    = & (A \cap B) \cup (B \cap C)
+      && \ans{\text{Domination Laws}}\\ 
+    = & (B \cap A) \cup (B \cap C)
+      && \ans{\text{Commutative Laws}}\\
+    = & B \cap (A \cup C)
+      && \ans{\text{Distributive Laws}}
 \end{align*}
-
+%
+\end{problem}
 
 \seksjon{2.5}
 
@@ -121,14 +180,45 @@
   \end{subproblem}
 \end{problem}
 
+\begin{answer}
+  Universe $\U$.
+  Assume that $\forall x \ p(x) \vee \forall
+  x \ q(x)$ is true $x \in \U$. Assume that $\forall x \ p(x)$ is true, then
+  there exists some $c \in \U$ such that $p(c)$ is true, and thus $p(c) \vee q(c)$ is true. Since $c$ can be
+  choosen arbitarily, we have shown that $\forall x [p(x) \vee q(x)]$, which is
+  what we wanted to show. If we instead assume that $\forall x \ q(x)$ is true,
+  the exact same argument can be made.
+\end{answer}
+
 \begin{subproblem}
   Find a counterexample to the converse in part \ref{problem:2.5.8.a}. That is,
   find open statements $p(x)$, $q(x)$, and a universe such that $\forall x [p(x)
   \vee q(x)]$ is true, while $\forall\,x \ p(x) \vee \forall \, x \ q(x)$ is false.
 \end{subproblem}
 
+\begin{answer}
+  Let $\U$ be some universe such that there exists non-empty disjunctive subsets $A$, $B$
+  such that ($A \cap B = \emptyset$) and $\U = A \cup B$.
+
+  Let $p(x)\ \colon x \in A$, and similarly $q(x)\ \colon x \in B$. If
+  $y \in B $, then $p(y)$ is false (as $A \cap B = \emptyset$), thus $p(x)$ can
+  not hold for all $x$ in other words $\forall x
+  \ p(x)$ is false. Similarly, let $y \in A$ then $q(y)$ is false (again since
+  $A \cap B = \emptyset$), thus $\forall x \ q(x)$ is false.
+  However, $\forall x [p(x) \vee q(x)]$ is true as for every $x \in \U = A \cup
+  B$. \medskip
+
+  For a concrete example let $\U = \N$, $n \in \N$, and let $p(n) \colon n \text{ is
+    odd}$, $q(n) \colon n \text{ is even}$. Then, $p(n)$ is not true for every
+  $n$ as there exists even numbers, and similarly $q(n)$ is not true for every
+  $n$ as there exists odd numbers. However, every $n$ is either
+  even or odd. 
+\end{answer}
+
+\ans{\newpage}
+
 \begin{problem}[10]
-  Provide the missing reaasons for the steps verifying the following argument
+  Provide the missing reasons for the steps verifying the following argument:
   %
   \begin{align*}
     & \forall\,x\ [p(x) \vee q(x)]\\
@@ -138,38 +228,37 @@
     \cmidrule{1-2} \\[-1cm]
      \therefore \ & \exists \, x \ \neg s(x)
   \end{align*}
-\end{problem}
 
-
-\begin{tabular}{r L p{1cm} p{8cm}}
-  \textbf{Steps} & & & \textbf{Reasons} \\
-  \ITEM \label{step-1}& \forall\,x\ [p(x) \vee q(x)]
+  \begin{tabular}{r L p{1cm} p{8cm}}
+    \textbf{Steps} & & & \textbf{Reasons} \\
+    \ITEM \label{step-1}& \forall\,x\ [p(x) \vee q(x)]
         & & Premisse\\
-  \ITEM \label{step-2} & \exists\,x\ \neg p(x)
+    \ITEM \label{step-2} & \exists\,x\ \neg p(x)
         & & Premisse \\
-  \ITEM \label{step-3} & \neg p(a)
+    \ITEM \label{step-3} & \neg p(a)
         & & \Cref{step-2} and the definition of truth for $\exists \,x\ p(x)$. The reason for this step is also referred to as the \emph{Rule of Existential Specification}\\
-  \ITEM \label{step-4} & p(a) \vee q(a)
-        & & \ans{\Cref{step-3} and Modus Potens}\\
-  \ITEM \label{step-5} & q(a)
-        & & \ans{\Cref{step-1} and the rule of Conjunctive Simplification}\\
-  \ITEM \label{step-6} & \forall\,x\ [\neg q(x) \vee r(x)]
-        & & \ans{\Cref{step-4,step-5} and the Rule of Conjunction}\\
-  \ITEM & \neg q(a) \vee r(a)
-        & & \ans{Premisse}\\
-  \ITEM \label{step-8} & q(a) \to r(a)
-        & & \ans{\Cref{step-8} and Contraposition $a \to b \Leftrightarrow \neg b \to \neg a$} \\
-  \ITEM \label{step-9} & r(a)
-        & & \ans{\Cref{step-9} and DeMorgan's Laws}\\
-  \ITEM & \forall\,x\ [s(x) \to \neg r(x)]
-        & & \ans{\Cref{step-6,step-9} and Modus Potens}\\
-  \ITEM \label{step-11} & s(a) \to \neg r(a)
-        & & \ans{Premisse}\\
-  \ITEM \label{step-12} & r(a) \to \neg s(a)
-        & & \ans{\Cref{step-11} and Contraposition $a \to b \Leftrightarrow \neg b \to \neg a$}\\
-  \ITEM \label{step-13} & \neg s(a)
-        & & \ans{\Cref{step-12} and DeMorgan's Laws}\\
-  \ITEM \label{step-14} & \therefore \ \exists \, x \ \neg s(x) 
+    \ITEM \label{step-4} & p(a) \vee q(a)
+        & & \ans{ \Cref{step-1} and the \emph{Rule of Universal Specification}}\\
+    \ITEM \label{step-5} & q(a)
+        & & \ans{ \Cref{step-3,step-4} and the Rule of Disjunctive Syllogism }\\
+    \ITEM \label{step-6} & \forall\,x\ [\neg q(x) \vee r(x)]
+        & & \ans{ Premisse }\\
+    \ITEM \label{step-7}& \neg q(a) \vee r(a)
+        & & \ans{\Cref{step-6} and the Rule of Universal Specification }\\
+    \ITEM \label{step-8} & q(a) \to r(a)
+        & & \ans{ \Cref{step-7} and the rule of Material Implication ($P\to Q \Leftrightarrow \neg P \vee Q$). } \\
+    \ITEM \label{step-9} & r(a)
+        & & \ans{ Modus Ponens on \Cref{step-5,step-8}.}\\
+    \ITEM \label{step-10} & \forall\,x\ [s(x) \to \neg r(x)]
+        & & \ans{Premisse} \\
+    \ITEM \label{step-11} & s(a) \to \neg r(a)
+        & & \ans{ \Cref{step-10} and the Rule of Universal Specification}\\
+    \ITEM \label{step-12} & r(a) \to \neg s(a)
+        & & \ans{Transposition ($P\to Q \Leftrightarrow \neg Q \to \neg P$) and \cref{step-11}}\\
+    \ITEM \label{step-13} & \neg s(a)
+        & & \ans{Modus Tollens on \cref{step-9,step-12}}\\
+    \ITEM \label{step-14} & \therefore \ \exists \, x \ \neg s(x) 
         & & \Cref{step-13} and the definition of the truth for $\exists\,x\ \neg s(x)$. The reason for this step is also referred to as the \emph{Rule of Existential Generalization}.
-\end{tabular}
+  \end{tabular}
+\end{problem}
 \end{document}
