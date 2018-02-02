@@ -1,0 +1,175 @@
+\documentclass[a4paper, english, 12pt]{article} % norsk & english is supported
+
+\newcommand{\exerciseNumber}{4}
+\newcommand{\solutions}{false} % Change to   true   to create solutions
+% Must be defined before course package, \exerciseNumber, and \solutions
+\usepackage{IMF}
+
+\usepackage{MA0301}
+
+\begin{document}
+
+\titlebox
+
+\begin{problem}[3]
+  Let $B$ be a Boolean algebra. For $x,y,z \in B$ find the dual expressions of
+\end{problem}
+
+\begin{subsubproblem}
+  $x \cdot \overline{y} + x \cdot \overline{z} + y \cdot \overline{x}$
+\end{subsubproblem}
+
+\begin{subsubproblem}
+  $x \cdot y \cdot \overline{z} + x \cdot \overline{y} \cdot z$
+\end{subsubproblem}
+
+\begin{subsubproblem}
+    $x \cdot y \cdot (x + 0 + (z \cdot 1))$
+\end{subsubproblem}
+
+\begin{answer}
+  Hello
+\end{answer}
+
+\begin{problem}
+  Let $B$ be a Boolean algebra. Let $x,y,z \in B$ and reduce the following
+  expressions as much as possible
+\end{problem}
+
+\begin{subsubproblem}
+  $xy\overline{x}z$
+\end{subsubproblem}
+
+\begin{subsubproblem}
+    $xyzy$
+\end{subsubproblem}
+
+\begin{problem}[7]
+  Simplify $\bigl( p \wedge (\neg s \vee q \vee \neg q) \bigr) \vee \bigl( (s
+  \vee t \vee \neg s) \wedge \neg q \bigr)$.
+\end{problem}
+
+\begin{answer}
+  This is the same as the question about the circuit diagram in the previous
+  exercise. Since $(\neg s \vee q \vee \neg q) = (\neg s \vee T_0) = T_0$
+  and similarly, $(s \vee t vee \neg s) = (t \vee T_0) = T_0$ we have
+  %
+  \begin{equation*}
+    \bigl( p \wedge (\neg s \vee q \vee \neg q) \bigr) \vee \bigl( (s
+    \vee t \vee \neg s) \wedge \neg q \bigr)
+    = \bigl( p \wedge T_0 \bigr) \vee \bigl( T_0 \wedge \neg q \bigr)
+    = p \vee \neg q
+  \end{equation*}
+\end{answer}
+
+\seksjon{15.1}
+
+\begin{problem}[1]
+  Find the value of each of the following Boolean expressions if the values of
+  the Boolean variables $w$, $x$, $y$ and $z$ are $1$, $1$, $0$, and $0$,
+  respectively.
+\end{problem}
+
+\begin{subproblem}[2]
+  $w + \overline{x}y$
+\end{subproblem} 
+
+\begin{subproblem}[4]
+  $(wx + y \overline{z}) + w \overline{y} + \overline{(w+y)(\overline{x}+y)}$
+\end{subproblem} 
+
+\begin{problem}
+  Let $w$, $x$ and $y$ be Boolean variables where the value of $x$ is $1$. For
+  each of the following Boolean expressions, determine, if possible, the value
+  of the expression. If you cannot determine the value of the expression, then
+  find the number of assignments of values for $w$ and $y$ that will result in
+  the value $1$ for the expression. 
+\end{problem}
+
+\begin{subproblem}
+  $x + xy + w$
+\end{subproblem} 
+
+\begin{subproblem}
+  $xy + w$
+\end{subproblem} 
+
+\begin{problem}[11]
+  Simplify the following Boolean expressions.
+\end{problem}
+
+\begin{subproblem}
+  $xy + (x + y)\overline{z} + y$
+\end{subproblem} 
+
+\begin{problem}
+  Find the values of the Boolean variables $w$, $x$, $y$, $z$ that satisfies the
+  following system of simultaneous equations.
+  %
+  \begin{equation*}
+    x + \overline{x} y = 0 \qquad
+    \overline{x} y = \overline{x} z \qquad
+    \overline{x} y + \overline{x} z + z w = \overline{z} w 
+  \end{equation*}
+\end{problem}
+
+\seksjon{3.2}
+
+\begin{problem}[4]
+  Let $A, B, C, D, E \subseteq \Z$ be defined as follows:
+  
+  \begin{Tabbedenum}[label = \hspace{1cm}$\Alph*$]{2}
+    \item \label{A} $= \{ 2n \mid m \in \Z \}$ 
+    \item[] \hspace{-3cm} --- that is, $A$ is the set of all (integer) multiples of $2$;
+    \item \label{B} $= \{ 3n \mid n \in \Z \}$ 
+    \item \label{C} $= \{ 4n \mid n \in \Z \}$
+    \item \label{D} $= \{ 6n \mid n \in \Z \}$
+    \item \label{E} $= \{ 8n \mid n \in \Z \}$
+  \end{Tabbedenum}
+\end{problem}
+
+\begin{subproblem}
+  Which of the following statements are true and which are false?
+
+  \begin{Tabbedenum}[label = \textbf{\roman*}), align=right]{2}
+    \item $E \subseteq C \subseteq A$ 
+    \item $A \subseteq C \subseteq E$ 
+    \item $B \subseteq D $ 
+    \item $D \subseteq B $ 
+    \item $D \subseteq B $ 
+    \item $\overline{D} \subseteq \subseteq{A}$ 
+  \end{Tabbedenum}
+\end{subproblem}
+
+\begin{subproblem}
+  Determine each of the following sets
+
+  \begin{Tabbedenum}[label = \textbf{\roman*}), align=right]{3}
+    \item $ C \cap E $ 
+    \item $ B \cup D $ 
+    \item $ A \cap B $ 
+    \item $ B \cap D $ 
+    \item $ \overline{A} $ 
+    \item $ A \cap E $ 
+  \end{Tabbedenum}
+
+\end{subproblem}
+
+
+\begin{subproblem}
+  Which of the following statements are true and which are false?
+\end{subproblem}
+
+\begin{problem}[17]
+  Using the laws of set theory, simplify each of the following:
+\end{problem}
+
+\begin{subproblem}[2]
+  $(A \cap B) \cup (A \cap B \cap \overline{C} \cap D) \cup (\overline{A} \cap B)$
+\end{subproblem}
+
+\begin{subproblem}[4]
+  $\overline{A} \cup \overline{B} \cup (A \cap B \cap \overline{C})$
+\end{subproblem}
+
+\end{document}

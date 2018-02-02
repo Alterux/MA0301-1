@@ -169,7 +169,7 @@
         }{%
           {\setcounter{problemListi}{#1-1}}%
         }%
-      \item\setcounter{subproblemListi}{0}
+      \item\setcounter{subproblemListi}{0}\setcounter{subsubCounter}{0}
       }{\end{problemList}}
     
     \DeclareDocumentEnvironment{subproblem}{ o } {%
@@ -179,7 +179,7 @@
         }{%
           {\setcounter{subCounter}{#1}\setcounter{subproblemListi}{#1-1}}%
         }%
-      \item 
+      \item \setcounter{subsubproblemListi}{0}
       }{\end{subproblemList}}
     
     \DeclareDocumentEnvironment{subsubproblem}{ o } {%

@@ -41,14 +41,31 @@
 %    OWN COMMANDS BELOW HERE 
 
 % ========================================
+% Figures
+% ========================================
+   \graphicspath{{./images/}} %Path to images
+
+
+% ========================================
 %    Tables
 % ========================================
+    \usepackage{tabto}%for \tab and \NumTabs
     \usepackage{array}   % for \newcolumntype macro
     \newcolumntype{L}{>{$}l<{$}} % math-mode version of "l" column type
     \newcolumntype{C}{>{$}c<{$}} % math-mode version of "l" column type
     \newcommand{\F}{\text{F}}
     \newcommand{\T}{\text{T}}
-% ===================================
+
+    %=
+    % Lists
+    % =
+\newenvironment{Tabbedenum}[2][]
+{\NumTabs{#2}\noindent\hspace{-0pt}\begin{enumerate*}[label=\emph{\alph*}),
+    labelindent=2cm,
+itemjoin={\tab},#1]}%
+{\end{enumerate*}}
+    
+%===================================
 % Algorithms
 % ===================================
     \usepackage{algorithm}
