@@ -1,7 +1,7 @@
 \documentclass[a4paper, english, 12pt]{article} % norsk & english is supported
 
 \newcommand{\exerciseNumber}{4}
-\newcommand{\solutions}{false} % Change to   true   to create solutions
+\newcommand{\solutions}{true} % Change to   true   to create solutions
 % Must be defined before course package, \exerciseNumber, and \solutions
 \usepackage{IMF}
 
@@ -15,20 +15,40 @@
   Let $B$ be a Boolean algebra. For $x,y,z \in B$ find the dual expressions of
 \end{problem}
 
+\begin{answer}
+  To get the dual of any expression we replace \texttt{OR} with \texttt{AND},
+  \texttt{AND} with \texttt{OR}, \texttt{1} with \texttt{0} and \texttt{0} with \texttt{1}.
+\end{answer}
+
 \begin{subsubproblem}
   $x \cdot \overline{y} + x \cdot \overline{z} + y \cdot \overline{x}$
 \end{subsubproblem}
+
+\begin{answer}
+  \begin{equation*}
+    (x + \overline{y}) \cdot (x + \overline{z}) \cdot (y + \overline{x})
+  \end{equation*}
+\end{answer}
 
 \begin{subsubproblem}
   $x \cdot y \cdot \overline{z} + x \cdot \overline{y} \cdot z$
 \end{subsubproblem}
 
+\begin{answer}
+  \begin{equation*}
+    (x+y+\overline{z}) \cdot (x + \overline{y} + z)
+  \end{equation*}
+\end{answer}
+
 \begin{subsubproblem}
-    $x \cdot y \cdot (x + 0 + (z \cdot 1))$
+    $x \cdot y \cdot (x + \0 + (z \cdot \1))$
 \end{subsubproblem}
 
 \begin{answer}
-  Hello
+  \begin{equation*}
+    (x + y + (x \cdot \1 \cdot (z + \0)))
+    = x + y + xz
+  \end{equation*}
 \end{answer}
 
 \begin{problem}
@@ -37,11 +57,11 @@
 \end{problem}
 
 \begin{subsubproblem}
-  $xy\overline{x}z$
+  $xy\overline{x}z \ans{= x\overline{x}yz = \0 \cdot yz = \0}$
 \end{subsubproblem}
 
 \begin{subsubproblem}
-    $xyzy$
+    $xyzy \ans{= xyyz = xyz}$
 \end{subsubproblem}
 
 \begin{problem}[7]
@@ -52,7 +72,7 @@
 \begin{answer}
   This is the same as the question about the circuit diagram in the previous
   exercise. Since $(\neg s \vee q \vee \neg q) = (\neg s \vee T_0) = T_0$
-  and similarly, $(s \vee t vee \neg s) = (t \vee T_0) = T_0$ we have
+  and similarly, $(s \vee t \vee \neg s) = (t \vee T_0) = T_0$ we have
   %
   \begin{equation*}
     \bigl( p \wedge (\neg s \vee q \vee \neg q) \bigr) \vee \bigl( (s
@@ -71,11 +91,12 @@
 \end{problem}
 
 \begin{subproblem}[2]
-  $w + \overline{x}y$
+  $w + \overline{x}y = \ans{\1 + \overline{\1} \cdot \0 = \1 + \0 \cdot \0 = \1 + \0 = \1 } $
 \end{subproblem} 
 
 \begin{subproblem}[4]
-  $(wx + y \overline{z}) + w \overline{y} + \overline{(w+y)(\overline{x}+y)}$
+  $(wx + y \overline{z}) + w \overline{y} + \overline{(w+y)(\overline{x}+y)} =
+  (\1 + \1) + \1 + \overline{\1 \cdot \0} = \1 + \1 + \1 + \1 = \1$
 \end{subproblem} 
 
 \begin{problem}
@@ -87,31 +108,62 @@
 \end{problem}
 
 \begin{subproblem}
-  $x + xy + w$
+  $x + xy + w = \ans{x(1+y) + w = x \cdot \1 + w = \1 + w = 1}$
 \end{subproblem} 
 
 \begin{subproblem}
   $xy + w$
 \end{subproblem} 
 
-\begin{problem}[11]
-  Simplify the following Boolean expressions.
+\begin{problem}
+  The expression above is dependent on the value of $y$ as $x \cdot \1 = 1$, but
+  $x \cdot \0 = \0$. Thus, the expression is true when $y \vee w$ is true,
+  (atleast one of $y$ and $w$ must be true).
 \end{problem}
 
+\begin{problem}[11]
 \begin{subproblem}
-  $xy + (x + y)\overline{z} + y$
-\end{subproblem} 
+  Simplify the following Boolean expressions.
+  \begin{align*}
+    xy + (x + y)\overline{z} + y
+    \ans{& = yx + x\overline{z} + y \overline{z} + y \\} 
+    \ans{& = y(1 + x + \overline{z}) + x\overline{z} \\}
+    \ans{& = y + x \overline{z}}
+  \end{align*}
+\end{subproblem}
+\end{problem}
 
 \begin{problem}
   Find the values of the Boolean variables $w$, $x$, $y$, $z$ that satisfies the
   following system of simultaneous equations.
   %
-  \begin{equation*}
-    x + \overline{x} y = 0 \qquad
-    \overline{x} y = \overline{x} z \qquad
-    \overline{x} y + \overline{x} z + z w = \overline{z} w 
-  \end{equation*}
+  \begin{align}
+    x + \overline{x} y & = 0 \label{eq:12-a} \\
+    \overline{x} y & = \overline{x} z \label{eq:12-b} \\ 
+    \overline{x} y + \overline{x} \overline{z} + z w & = \overline{z} w \label{eq:12-c} 
+  \end{align}
 \end{problem}
+
+\begin{answer}
+  For \cref{eq:12-a} to be false both $x$ and $\overline{x}y$ must be false,
+  the first implying $x$ is false, and the second that $y$ is false (as
+  $\overline{x}$ is true).
+
+  Inserting this into \cref{eq:12-b} we get
+  %
+  \begin{equation*}
+    \overline{\0} \cdot \0 = \overline{1} z
+  \end{equation*}
+  %
+  and solving this equation for $z$ we get $z = \0$. Inserting this into the
+  last \cref{eq:12-c}
+  %
+  \begin{equation*}
+    \overline{\0} \cdot \0 + \overline{x} \cdot \overline{\0} + \0 \cdot w = \overline{z} w\,.
+  \end{equation*}
+  %
+  As the right left-side is $0$ we get $w = \1$. In summary $(x,y,z,w)=(\0,\0,\0,\1)$.
+\end{answer}
 
 \seksjon{3.2}
 
@@ -131,33 +183,29 @@
 \begin{subproblem}
   Which of the following statements are true and which are false?
 
-  \begin{Tabbedenum}[label = \textbf{\roman*}), align=right]{2}
-    \item $E \subseteq C \subseteq A$ 
-    \item $A \subseteq C \subseteq E$ 
-    \item $B \subseteq D $ 
-    \item $D \subseteq B $ 
-    \item $D \subseteq B $ 
-    \item $\overline{D} \subseteq \subseteq{A}$ 
-  \end{Tabbedenum}
+  \begin{enumerate}[label = \textbf{\roman*})]
+    \item $E \subseteq C \subseteq A$ \ans{True} 
+    \item $A \subseteq C \subseteq E$ \ans{False. $2\in A, 2 \not\in C$ usw}
+    \item $B \subseteq D $ \ans{False}
+    \item $D \subseteq B $ \ans{True. $3 \in B, 3 \not\in D$}
+    \item $D \subseteq A $ \ans{True. $2 \in A, 2 \not\in D$}
+    \item $\overline{D} \subseteq \overline{A}$ \ans{False} 
+  \end{enumerate}
 \end{subproblem}
 
 \begin{subproblem}
   Determine each of the following sets
 
-  \begin{Tabbedenum}[label = \textbf{\roman*}), align=right]{3}
-    \item $ C \cap E $ 
-    \item $ B \cup D $ 
-    \item $ A \cap B $ 
-    \item $ B \cap D $ 
-    \item $ \overline{A} $ 
-    \item $ A \cap E $ 
-  \end{Tabbedenum}
+  \begin{enumerate}[label = \textbf{\roman*})]
+    \item $ C \cap E \ans{= E}$ 
+    \item $ B \cup D \ans{= D}$ 
+    \item $ A \cap B \ans{= D}$ 
+    \item $ B \cap D \ans{= D}$ 
+    \item $ \overline{A}$ \ans{\text{Every number not divisible by $2$. In other
+      words every odd number}} \ans{\item[] $\overline{A} = \Z / A = \{2n+1 \mid n \in \Z\}$}
+    \item $ A \cap E \ans{= E}$ 
+  \end{enumerate}
 
-\end{subproblem}
-
-
-\begin{subproblem}
-  Which of the following statements are true and which are false?
 \end{subproblem}
 
 \begin{problem}[17]
@@ -165,11 +213,48 @@
 \end{problem}
 
 \begin{subproblem}[2]
-  $(A \cap B) \cup (A \cap B \cap \overline{C} \cap D) \cup (\overline{A} \cap B)$
+  \ifthenelse{\boolean{\solutions}}{}{%
+  $(A \cap B) \cup (A \cap B \cap \overline{C} \cap D) \cup (\overline{A} \cap B)$}
 \end{subproblem}
 
+\begin{answer} 
+  \begin{align*}
+    \\[-2.5cm]
+      & \textbf{Steps} && \textbf{Reasons} \\
+      & (A \cap B) \cup (A \cap B \cap \overline{C} \cap D) \cup (\overline{A} \cap B)
+     && \\
+    = & (A \cap B) \cup (\overline{A} \cap B)  
+     && \text{Absorption law} \\
+    = &(A \cap \overline{A}) \cup B
+     && \text{Distributive law} \\
+    = & \emptyset \cup B
+     && \text{Inverse laws} \\
+    = & B 
+     && \text{Identity laws}
+  \end{align*}
+\end{answer}
+
 \begin{subproblem}[4]
-  $\overline{A} \cup \overline{B} \cup (A \cap B \cap \overline{C})$
+  % \ifthenelse{\equal{solutions}{true}}{TRUE}{}
+  \ifthenelse{\boolean{\solutions}}{}{%
+    $\overline{A} \cup \overline{B} \cup (A \cap B \cap \overline{C})$}
 \end{subproblem}
+
+\begin{answer} 
+  \begin{align*}
+    \\[-2.5cm]
+      & \textbf{Steps} && \textbf{Reasons} \\
+      & \overline{A} \cup \overline{B} \cup (A \cap B \cap \overline{C})
+     && \\
+    = & \bigl[(\overline{A} \cup \overline{B}) \cup (A \cap B)\bigr] \cap \bigl[\overline{A} \cup \overline{B} \cup \overline{C}\bigr]
+     && \text{Distributive laws twice} \\
+    = & \bigl[ \overline{A \cap B} \cup (A \cap B)\bigr] \cap \bigl[\overline{A} \cup \overline{B} \cup \overline{C}\bigr]
+     && \text{DeMorgan's laws} \\ 
+    = & \bigl[ \U \bigr] \cap \bigl[\overline{A} \cup \overline{B} \cup \overline{C})\bigr]
+     && \text{Inverse laws} \\
+    = & \overline{A} \cup \overline{B} \cup \overline{C}
+     && \text{Domination laws}
+  \end{align*}
+\end{answer}
 
 \end{document}
