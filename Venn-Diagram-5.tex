@@ -1,0 +1,24 @@
+\documentclass[border={-11pt 2pt 2pt 2pt},crop]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{shapes,backgrounds}
+\begin{document}
+\pagestyle{empty}
+\def\firstcircle{(0,0) circle (1.75cm)}
+\def\secondcircle{(60:2cm) circle (1.75cm)}
+\def\thirdcircle{(0:2cm) circle (1.75cm)}
+\begin{tikzpicture}
+    \begin{scope}[shift={(3cm,-5cm)}, fill opacity=0.5]
+        \fill[red] \firstcircle;
+        \fill[green] \secondcircle;
+        \fill[blue] \thirdcircle;
+        \draw \firstcircle node[below left] {$3$};
+        \draw \secondcircle node [above] {$5$};
+        \draw \thirdcircle node [below right] {$7$};
+
+        \node at (1,0.4) {$3 \cap 5 \cap 7$};
+        \node at (0,1) {$3 \cap 5$};
+        \node at (1,-0.5) {$3 \cap 7$};
+        \node at (2,1) {$5 \cap 7$};
+    \end{scope}
+\end{tikzpicture}
+\end{document}
