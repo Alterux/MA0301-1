@@ -61,19 +61,25 @@
     			shrink=10]{microtype} \LoadMicrotypeFile{bch}
     \microtypecontext{spacing=nonfrench} 
 
-
+    \newcommand{\newpageanswer}{\ifthenelse{\boolean{\solutions}}{\newpage}{}}
+    
 % ===================================
 % Tables and figures
 % ===================================
     \usepackage{booktabs} % Use \toprule , \midrule and \bottomrule for tables
     \usepackage{subcaption}
+    \usepackage{float} % Allows the use of H in figures
+
+
     
     
 % ===================================
 % Mathematics
 % ===================================
-    \usepackage{amsmath, amssymb, amsthm, mathtools}   % Misc math environments
-
+    \usepackage{mathtools}
+    \usepackage{amssymb} 
+    \usepackage{amsthm} 
+    
 % ===================================
 % Header and footer 
 % ===================================
@@ -130,6 +136,10 @@
     \usepackage{comment}
     % \includecomment{answer} % Uncomment this to include answers
     \ifthenelse{\equal{\solutions}{true}}{\includecomment{answer}}{\excludecomment{answer}}
+    \specialcomment{Figure}{\begin{figure}[h!tbp]\centering}{\end{figure}}
+    \specialcomment{FigureH}{\begin{figure}[H]\centering}{\end{figure}}
+    \ifthenelse{\equal{\solutions}{true}}{}{\excludecomment{Figure}}
+    \ifthenelse{\equal{\solutions}{true}}{}{\excludecomment{FigureH}}
     
     \usepackage{xparse}
     \usepackage[inline]{enumitem}

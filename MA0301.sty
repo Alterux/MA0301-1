@@ -45,6 +45,21 @@
 % ========================================
    \graphicspath{{./images/}} %Path to images
 
+\usetikzlibrary{positioning,arrows,matrix}
+\newcommand{\equic}[4][1 cm]{
+  % \draw (0,0) circle (#1);
+  \foreach \x [count=\xi] in {#2} {
+    \coordinate[label =center:$\x$] (\x) at (\xi*360/#3:#1);
+  };
+  \foreach \x\y [count=\xi] in {#4} {
+    \draw (\x)--(\y);
+  };
+  \foreach \x [count=\xi] in {#2} {
+    \fill[color=white] (\x) circle (0.2 cm);
+    \coordinate[label =center:$\x$] (\x) at (\xi*360/#3:#1);
+  }
+
+}
 
 % ========================================
 %    Tables
@@ -84,7 +99,21 @@ itemjoin={\tab},#1]}%
     \newcommand{\N}{\mathbb{N}}
     \newcommand{\C}{\mathbb{C}}
     \newcommand{\U}{\mathscr{U}}
+    \newcommand{\RR}{\mathscr{R}}
+
+        \theoremstyle{plain} %cursive 
+        \newtheorem{lemma}{Lemma}
+        \newtheorem{thm}{Theorem}[lemma]
+            % \newtheorem{question}{Question}
+            % \newtheorem{prop}[lemma]{Proposition}
+            % \newtheorem{cor}[lemma]{Corollary}
     
+        % \theoremstyle{definition} %Non cursive
+            % \newtheorem*{definition}{Definition}
+            % \newtheorem*{remark}{Remark}
+
+        
+            
 % ===================================
 % Miscelanious 
 % ===================================
