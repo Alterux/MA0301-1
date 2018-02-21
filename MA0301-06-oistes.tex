@@ -1,0 +1,454 @@
+\documentclass[a4paper, english, 12pt]{article} % norsk & english is supported
+
+\newcommand{\exerciseNumber}{6}
+\newcommand{\solutions}{true} % Change to   true   to create solutions
+% Must be defined before course package, \exerciseNumber, and \solutions
+\usepackage{IMF}
+
+\usepackage{MA0301}
+
+% \excludecomment{Figure}
+
+    \usetikzlibrary{decorations.markings}
+
+    \usepackage{tkz-euclide}
+    \usetkzobj{all}
+
+\tikzset{
+digraph/.style={draw, postaction={decorate,
+   decoration={markings,mark=at position .6 with {\arrow[scale=3]{stealth};}}}
+   },
+}
+
+\begin{document}
+
+\titlebox
+
+\begin{problem}[5]
+  Use the altenrative principle of induction to show that if $u_n$ is defined
+  recursively by the rules $u_1=1$, $u_2=5$ and for all $n > 1$, $u_{n+1} = 5 u_n -
+  6 u_{n-1}$, then $u_n = 3^n - 2^n$ for all $n \in \N$.
+\end{problem}
+
+\begin{answer}
+  \paragraph{Base case :} For $n=1,2$ we have
+  % 
+  \begin{equation*}
+    u_1 = 1 = 3^1 - 2^1 \qquad \text{and} \qquad u_2 = 5 = 3^2 - 2^2 ,
+  \end{equation*}
+  % 
+  so the hypothesis holds for the base case.
+  \paragraph{Inductive step:} Assume that the statement
+  %
+  \begin{equation*}
+    u_{k} = 3^k - 2^k
+  \end{equation*}
+  %
+  holds for all $k$, $k < n$. Wish to show that it then holds for $k = n +1$.
+  %
+  \begin{align*}
+    u_{k+2} = 5 u_{k+1} - 6 u_{k}
+    & = 5 (3^{k+1} - 2^{k+1}) - 6(3^{k} - 2^k) \\
+    & = (5 \cdot 3^{k+1} - 5 \cdot 2^{k+1}) - (2 \cdot 3^{k+1} - 3 \cdot 2^{k+1}) \\
+    & = 3 \cdot 3^{k+1} - 2 \cdot 2^{k+1}
+    = 3^{k+2} - 2^{k+2}
+  \end{align*}
+  %
+  which is what we wanted to show. To see the second equality a bit clearer we
+  have $6 \cdot 3^k = 2 \cdot 3 \cdot 3^k = 2 \cdot 3^{k+1}$ and similarly for
+  $6 \cdot 2^k$. 
+\end{answer}
+
+\newpageanswer
+
+\begin{problem}
+  \begin{subproblem}
+    \label{subproblem:6a}
+    Guess a formula for $\sum_{i=1}^n bi + c$, where $b$, $c$ are given numbers,
+    and prove it using the principle of induction. 
+  \end{subproblem}
+\end{problem}
+
+\begin{answer}
+  The sum of the first $n$ natural numbers, is $n(n+1)/2$ thus,
+  %
+  \begin{equation*}
+    \sum_{i=1}^{n} bi + c
+    = b \sum_{i=1}^{n} i + \sum_{i=1}^n c
+    = b \frac{n(n+1)}{2} + cn.
+  \end{equation*}
+  %
+  \paragraph{Base case:} For $n = 1$ we have
+  %
+  \begin{equation*}
+    LHS = \sum_{i=1}^1 bi + c = b + c\,, \qquad
+    RHS = b \frac{1(1+1)}{2} + c \cdot 1 = b + c.
+  \end{equation*}
+  %
+  so the hypothesis holds for the base case.
+  %
+  \paragraph{Inductive step:} Assume that the statement holds for $n=k$, in
+  other words
+  %
+  \begin{equation*}
+    \sum_{i=1}^{k} bi + c
+    = b \frac{k(k+1)}{2} + ck.
+  \end{equation*}
+  %
+  Need to show that this implies that the statement holds for $n=k+1$
+  %
+  \begin{align*}
+    RHS & = \frac{(k+1)(k+2)}{2} + c(k+1) \\
+    LHS & = \sum_{i=1}^{k+1} bi + c \\
+        & = b (k+1) + c + \sum_{i=1}^k bi + c \\
+        & = b (k+1) + c + b\frac{k(k+1)}{2} + ck  
+          =  b \frac{(k+1)(k+2)}{2} + c(k+1)
+  \end{align*}
+  %
+  As $3(2k+1) + k(2k-1) = 2k^2 + 5k + 3 = (k+1)(2k+3)$ either by inspection or
+  the quadratic formula. The rest follows now by induction, and thus concludes
+  the proof.
+\end{answer}
+
+\begin{subproblem}
+  Use $6 \sum_{i=1}^n i^2 = n(n+1)(2n+1)$ and the result of \cref{subproblem:6a}
+  to write down a formula for $\sum_{i=1}^n ai^2 + bi + c$, where $a$,$b$,$c$
+  are given numbers.
+\end{subproblem}
+
+\begin{answer}
+  Splitting the sum and using \cref{subproblem:6a} immediately gives
+  \begin{align*}
+          \sum_{i=1}^n ai^2 + bi + c
+    & = a \sum_{i=1}^2i^2 + \sum_{i=1}^n bi + c \\
+    & = a \frac{n(n+1)(2n+1)}{6} + b \frac{n(n+1)}{2} + cn
+      =   \frac{n(n+1)(2an + a + 3b)}{6} + cn.
+  \end{align*} 
+\end{answer}
+
+\newpageanswer
+
+\seksjon{5.1}
+
+\begin{problem}[9]
+  Complete the proof of Theorem 1
+\end{problem}
+
+\begin{thm}
+  For any sets $A, B, C \subseteq \U$:
+  \begin{enumerate}[label = \textnormal{\textbf{\alph*)}}]
+    \item $A \times (B \cap C) = (A \times B) \cap (A \times C)$
+      \label{item:Theorem1a}
+    \item $A \times (B \cup C) = (A \times B) \cup (A \times C)$
+      \label{item:Theorem1b}
+    \item $(A \cap B) \times C = (A \times C) \cap (B \times C)$
+      \label{item:Theorem1c}
+    \item $(A \cup B) \times C = (A \times C) \cup (B \times C)$
+      \label{item:Theorem1d}
+  \end{enumerate}
+\end{thm}
+
+\begin{answer}
+  The book has proven \cref{item:Theorem1a}, thus we need to prove the remaining
+  three parts.
+  \begin{proof}[Proof of Theorem 1 \ref{item:Theorem1b}]
+    \begin{align*}
+      A \times (B \cup C)
+      & = \{ (x,y) \mid x \in A \ \text{and} \ y \in (B \cup C) \} \\
+      & = \{ (x,y) \mid x \in A \ \text{and} \ (y \in B \ \text{or} \ y \in C) \} \\
+      & = \{ (x,y) \mid (x \in A \ \text{and} \ y \in B) \ \text{or} \ (x \in A \ \text{or} \ y \in C) \} \\
+      & = \{ (x,y) \mid x \in A \ \text{and} \ y \in B \}
+          \, \cup \, 
+          \{ (x,y) \mid x \in A \ \text{and} \ y \in C \} \\
+      & = (A \times B) \cup (A \times C)\,. \qedhere
+    \end{align*}
+  \end{proof}
+  \begin{proof}[Proof of Theorem 1 \ref{item:Theorem1c}]
+    \begin{align*}
+      (A \cap B ) \times C
+      & = \{ (x,y) \mid x \in (A \cap B) \ \text{and} \ y \in C \} \\
+      & = \{ (x,y) \mid (x \in A \ \text{and} \ x \in B) \ \text{and} \ y \in C \} \\
+      & = \{ (x,y) \mid (x \in A \ \text{and} \ y \in C) \ \text{and} \ (x \in B \ \text{and} \ y \in C) \} \\
+      & = \{ (x,y) \mid x \in A \ \text{and} \ y \in C \}
+          \, \cap \, 
+          \{ (x,y) \mid x \in B \ \text{and} \ y \in C \} \\
+      & = (A \times C) \cap (B \times C)\,. \qedhere
+    \end{align*}
+  \end{proof}
+  \begin{proof}[Proof of Theorem 1 \ref{item:Theorem1d}]
+    \begin{align*}
+      (A \cup B) \times C 
+      & = \{ (x,y) \mid x \in (A \cup B) \ \text{and} \ y \in C \} \\
+      & = \{ (x,y) \mid (x \in A \ \text{or} \ x \in B) \ \text{and} \ y \in C \} \\
+      & = \{ (x,y) \mid (x \in A \ \text{and} \ y \in C) \ \text{or} \ (x \in B \ \text{and} \ y \in C) \} \\
+      & = \{ (x,y) \mid x \in A \ \text{and} \ y \in C \}
+          \, \cup \, 
+          \{ (x,y) \mid x \in B \ \text{and} \ y \in C \} \\
+      & = (A \times C) \cup (B \times C)\,. \qedhere
+    \end{align*}
+  \end{proof}
+\end{answer}
+
+\newpageanswer
+
+\begin{problem}[11]
+  For $A, B, C \subset \U$, prove that
+  %
+  \begin{equation*}
+    A \times (B - C) = (A \times B) - (A \times C)
+  \end{equation*}
+\end{problem}
+
+\begin{answer}
+  \begin{proof}
+  $B - C$ means everything in $B$ except everything in $C$.
+  The proof is done as before
+    \begin{align*}
+      A \times (B-C) 
+      & = \{ (x,y) \mid x \in A \ \text{and} \ y \in B - C \} \\
+      & = \{ (x,y) \mid x \in A \ \text{and} \ (y \in B \ \text{and} \ y \not\in C) \} \\
+      & = \{ (x,y) \mid (x \in A \ \text{and} \ y \in B) \ \text{and} \ (x \in A \ \text{and} \ y \not\in C) \} \\
+      & = \{ (x,y) \in A \times B \}
+          \, \cap \, 
+          \{ (x,y) \not\in A \times C \} \\
+      & = (A \times B) - (A \times C)\,. \qedhere
+    \end{align*}
+  \end{proof}
+\end{answer}
+
+
+\seksjon{7.2}
+
+\begin{problem}[6]
+  For sets $A$, $B$ and $C$, consider relations $\RR_1 \subseteq A \times B$,
+  $\RR_2 \subseteq B \times C$, and $\RR_3 \subseteq B \times C$. Prove that:
+\end{problem}
+
+\begin{subproblem}
+  $\RR_1 \circ (\RR_2 \cup \RR_3) = (\RR_1 \circ \RR_2) \cup (\RR_1
+  \circ \RR_3)$,
+\end{subproblem}
+
+\begin{answer}
+  As usual we prove the inclusion both ways.
+  \begin{enumerate}[align=left]
+     \item[  $\RR_1 \circ (\RR_2 \cup \RR_3) \subseteq (\RR_1 \circ \RR_2) \cup (\RR_1
+  \circ \RR_3)$:] Let $(x,z) \in \RR_1 \circ (\RR_2 \cup \RR_3)$, then there
+      exists some $y \in B$, $(x,y) \in \RR_1$, $(y,z) \in \RR_2 \cup \RR_3$. By
+      splitting this implies that for some $y \in B$, $((x,y) \in \RR_1,
+      (y,z)\in \RR_2)$ or $((x,y)\in \RR_1, (y,z)\in\RR_3)$. So $(x,z) \in \RR_1
+      \circ \RR_2$ or $(x,z)\in\RR_1 \circ \RR_2$. Which is the same as $(x,z)
+      \in (\RR_1 \circ \RR_2) \cup (\RR_1 \circ \RR_2)$, and this proves the inclusion.
+     \item[  $(\RR_1 \circ \RR_2) \cup (\RR_1
+  \circ \RR_3) \subseteq \RR_1 \circ (\RR_2 \cup \RR_3) $:] Let $(x,y) \in (\RR_1
+      \circ \RR_2) \cup (\RR_1 \circ \RR_3)$. Then, $(x,z) \in \RR_1 \circ \RR_2
+      $ or $(x,z) \in \RR_1 \circ \RR_3$. Assume without loss of generality that
+      $(x,z) \in \RR_1 \circ \RR_2$. Then there exists an element $y \in B$ so
+      that $(x,y) \in \RR_1$ and $(y,z) \in \RR_2$. But $(y,z) \in \RR_2$ means
+      that $(y,z) \in \RR_2 \cup \RR_3$, so $(x,z) \in \RR_1 \circ (\RR_2 \cup
+      \RR_3)$.   
+  \end{enumerate}
+\end{answer}
+    
+\begin{subproblem}
+  $\RR_1 \circ (\RR_2 \cap \RR_3) \subseteq (\RR_1 \circ \RR_1) \cap
+  (\RR_1 \circ \RR_3)$.
+\end{subproblem}
+
+\begin{answer}
+  To see that equality can not hold in the relation above let $A = B = C =
+  \{1,2,3\}$ with $\RR_1 = {(1,2), (1,1)}$, $\RR_2 = {(2,3)}$, $\RR_3 =
+  {(1,3)}$. Then $\RR_1 \circ (\RR_1 \circ \RR_3) = \RR_1 \circ \emptyset =
+  \emptyset$, but $(\RR_1 \circ \RR_2) \circ (\RR_1 \circ \RR_3) = {(1,3)} \neq
+  \emptyset$.
+  The proof is nearly identical to the proof above
+  \begin{enumerate}[align=left]
+     \item[$ \RR_1 \circ (\RR_2 \cap \RR_3) \subseteq (\RR_1 \circ \RR_1) \cap
+  (\RR_1 \circ \RR_3) $:] Let $(x,z) \in \RR_1 \circ (\RR_2 \cap \RR_3)$, then
+      there exists some $y \in B$, $(x,y) \in \RR_1$, $(y,z) \in \RR_2 \cap
+      \RR_3$. This implies that for some $y \in B$, $(x,y \in \RR_1, (y,z) \in
+      \RR_2)$ \emph{and} $((x,y) \in \RR_1, (y,z) \in \RR_3) $. So $(x,z) \in
+      \RR_1 \circ \RR_2$ \emph{and} $(x,z) \in \RR_1 \circ \RR_2$. Which is the
+      same as $(x,z) \in (\RR_1 \circ \RR_2) \cap (\RR_1 \circ \RR_2)$, and this
+      proves the inclusion.
+  \end{enumerate}
+\end{answer}
+
+\begin{problem}[15]
+  \begin{subproblem}
+    Draw the digraph $G_1 = (V_1, E_1)$ where $V_1 = \{a,b,c,d,e,f\}$ and \\ $E_1 =
+    \{(a,b), (a,d), (b,c), (b,e), (d,b), (d,e), (e,c), (e,f), (f,d)\}$.
+  \end{subproblem} 
+\end{problem}
+
+\begin{answer}
+  Just connecting the different points immediately gives \cref{fig15:a}
+\end{answer}
+
+\begin{FigureH}
+  \centering
+  \begin{tikzpicture}
+    \matrix (m) [matrix of math nodes,
+    row sep=3em,
+    column sep=3em,
+    minimum width=2em,
+    nodes in empty cells, 
+    nodes={anchor=center}]
+    {
+                     &                 & \node (b) {b};     \\
+                     & \node (d) {d};  & \node (e) {e};                  \\
+      \node (a) {a}; & \node (f) {f};  & \node (c) {c};    \\
+    };
+    \path[digraph] (a.north east) -- (d.south west);
+    \path[digraph] (d.north east) -- (b.south west);
+    \path[digraph] (b.south) -- (e.north);
+    \path[digraph] (e.south) -- (c.north);
+    \path[digraph] (d.east) -- (e.west);
+    \path[digraph] (e.south west) -- (f.north east);
+    \path[digraph] (f.north) -- (d.south);
+  \end{tikzpicture} 
+  \caption{}
+  \label{fig15:a}
+\end{FigureH}
+
+\begin{subproblem}
+  Draw the undericted graph $G_1 = (V_2, E_2)$ where $V_2 = \{s,t,u,v,w,x,y,z\}$
+  and
+  %
+  \begin{align*}
+  E_2 = \{ & \{s,t\}, \{s,u\}, \{s,x\}, \{t,u\}, \{t,w\}, \{u,w\}, \\
+           & \{u,x\}, \{v,w\}, \{v,x\}, \{v,y\}, \{w,z\}, \{x,y\} \}
+  \end{align*}
+\end{subproblem}
+
+\begin{answer}
+  Sorting and connecting the different labels immediately gives \cref{fig15:b} 
+\end{answer}
+
+\begin{Figure}
+  \begin{tikzpicture}
+    \matrix (m) [matrix of math nodes,
+    row sep=3em,
+    column sep=3em,
+    minimum width=2em,
+    nodes in empty cells, 
+    nodes={anchor=center}]
+    {
+      s &        &  x &    \\
+      t &      u &  v & y  \\
+        &      w &  z &    \\
+    };
+    \draw (m-1-1.south east) -- (m-2-2.north west)
+    (m-2-2.west) -- (m-2-1.east)
+    (m-2-1.north) -- (m-1-1.south)
+    (m-1-1.east) -- (m-1-3.west)
+    (m-1-3.south east) -- (m-2-4.north west)
+    (m-2-4.west) -- (m-2-3.east)
+    (m-2-3.north) -- (m-1-3.south)
+    (m-1-3.south west) -- (m-2-2.north east)
+    (m-2-2.south) -- (m-3-2.north)
+    (m-3-2.north east) -- (m-2-3.south west)
+    (m-3-2.east) -- (m-3-3.west);
+  \end{tikzpicture}
+  \caption{}
+  \label{fig15:b}
+\end{Figure}
+
+\newpageanswer
+
+\begin{problem}[18]
+  For $A = \{v, w, x, y, z\}$, each of the following is the $(0,1)$-matrix for a
+  relation $\RR$ on $A$. Here the rows and the columns are indexed in the order
+  $v$, $w$, $x$, $y$, $z$. Determine the relation $\RR \subset A \times A$ in
+  each case, and draw the undirected graph $G$ associated with $\RR$
+\end{problem}
+
+\begin{subproblem}
+  $ \displaystyle
+  M(\RR)
+  =
+  \begin{bmatrix}
+    0 & 1 & 1 & 0 & 0 \\
+    1 & 0 & 1 & 1 & 1 \\
+    0 & 0 & 0 & 0 & 1 \\
+    0 & 0 & 0 & 0 & 1 \\
+    0 & 0 & 0 & 0 & 0 
+  \end{bmatrix}
+  $ 
+\end{subproblem}
+
+\begin{answer}
+  \begin{align*}
+    \RR = \{ (v,w), (v,x), (w,v), (w,x), (w,y), (w,z), (x,z), (y,z) \}
+  \end{align*} 
+\end{answer}
+
+\begin{Figure}
+  \begin{tikzpicture}
+    \matrix (m) [matrix of math nodes,
+    row sep=3em,
+    column sep=3em,
+    minimum width=2em,
+    nodes in empty cells, 
+    nodes={anchor=center}]
+    {
+                     &                 & \node (z) {z};    \\
+                     & \node (x) {x};  &      \\
+      \node (v) {v}; & \node (w) {w};  & \node (y) {y};             \\
+    };
+    \path[digraph] (v.north) -- (x.west);
+    \path[draw] (v.east) -- (w.west);
+    \path[digraph] (w.north) -- (x.south);
+    \path[digraph] (w.east) -- (y.west);
+    \path[digraph] (w.north east) -- (z.south west);
+    \path[digraph] (y.north) -- (z.south);
+    \path[digraph] (x.north) -- (z.west);
+  \end{tikzpicture} 
+  \caption{}
+\end{Figure}
+
+\begin{subproblem}
+  $ \displaystyle
+  M(\RR)
+  =
+  \begin{bmatrix}
+    0 & 1 & 1 & 1 & 0 \\
+    1 & 0 & 1 & 0 & 0 \\
+    1 & 1 & 0 & 0 & 1 \\
+    1 & 0 & 0 & 0 & 1 \\
+    0 & 0 & 1 & 1 & 0 
+  \end{bmatrix}
+  $ 
+\end{subproblem}
+
+\begin{answer}
+  \begin{align*}
+    \RR = \{ (v,w), (v,x), (v,y), (w,v), (w,x), (x,v), (x,w), (x,z), (y,v), (y,z), (z,x), (z,y) \}
+  \end{align*} 
+\end{answer}
+
+\begin{Figure}
+  \begin{tikzpicture}
+    \matrix (m) [matrix of math nodes,
+    row sep=1.5em,
+    column sep=3em,
+    minimum width=2em,
+    nodes in empty cells, 
+    nodes={anchor=center}]
+    {
+                      & \node (v) {v};  & \node (y) {y};\\
+       \node (w) {w}; &                 &     \\
+                      & \node (x) {x};  & \node (z) {z};             \\
+    };
+    \path[draw] (w.south east) -- (x.north west);
+    \path[draw] (x.east) -- (z.west);
+    \path[draw] (v.east) -- (y.west);
+    \path[draw] (w.north east) -- (v.south west);
+    \path[draw] (x.north) -- (v.south);
+    \path[draw] (z.north) -- (y.south);
+  \end{tikzpicture} 
+  \caption{}
+\end{Figure}
+
+
+\end{document}
