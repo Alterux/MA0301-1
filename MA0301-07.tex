@@ -1,0 +1,176 @@
+\documentclass[a4paper, english, 12pt]{article} % norsk & english is supported
+
+\newcommand{\exerciseNumber}{7}
+\newcommand{\solutions}{true} % Change to   true   to create solutions
+% Must be defined before course package, \exerciseNumber, and \solutions
+\usepackage{IMF}
+
+\usepackage{MA0301}
+
+\begin{document}
+
+\titlebox
+
+\seksjon{5.2}
+
+\begin{problem}
+  Determine whether or not each of the following relations is a function. If a
+  relation is a function, find its range.
+\end{problem}
+
+\begin{subproblem}[3]
+  $\{ (x, y) \mid x,y \in \R, \ y = 3x^2 + 1 \}$, a relation from $\R$ to $\R$
+\end{subproblem}
+
+\begin{subproblem}
+  $\{ (x, y) \mid x,y \in \Q, \ x^2 + y^2 = 1 \}$, a relation from $\Q$ to $\Q$
+\end{subproblem}
+
+\begin{subproblem}
+  $\RR$ is a relation from $A$ to $B$ where $\abs{A}=5$ and $\abs{B}=6$, and $\abs{\RR}=6$.
+\end{subproblem}
+
+\begin{problem}[3]
+  Let $A = \{1, 2, 3, 4\}$ and $B = \{x, y, z\}$.
+\end{problem}
+
+\begin{subproblem}
+  List five functions from $a$ to $b$.
+\end{subproblem}
+
+\begin{subproblem}
+  How many functions $f \colon A \to B$ are there?
+\end{subproblem}
+
+\begin{subproblem}
+  How many functions $f \colon A \to B$ are one-to-one?
+\end{subproblem}
+
+\begin{subproblem}
+  How many functions $g \colon B \to A$ are there?
+\end{subproblem}
+
+\begin{subproblem}
+  How many functions $g \colon B \to A$ are one-to-one?
+\end{subproblem}
+
+\begin{subproblem}
+  How many functions $f \colon A \to B$ satisfy $f(1) = x$?
+\end{subproblem}
+
+\begin{subproblem}
+  How many functions $f \colon A \to B$ satisfy $f(1) = f(2) = x$?
+\end{subproblem}
+
+\begin{subproblem}
+  How many functions $f \colon A \to B$ satisfy $f(1) = x$ and $f(2) = y$?
+\end{subproblem}
+
+\begin{problem}[5]
+  Let $A. B, C \subset \R^2$ where $A = \{{x,y} \mid y = 2x + 1\}$, $B = \{(x,y)
+  \mid y = 3x\}$, and $C = \{(x, y) \mid x - y = 7\}$. Determine each of the following:
+\end{problem}
+
+\begin{subproblem}[3]
+  $\overline{\overline{A} \cup \overline{C}}$
+\end{subproblem}
+
+\begin{subproblem}
+  $\overline{B} \cup \overline{C}$
+\end{subproblem}
+
+\begin{problem}[8]
+  Determine whether each of the following statements is true or false. If the
+  statement is false, provide a counterexample
+\end{problem}
+
+\begin{subproblem}
+  $\floor{a} = \ceil{a}$ for all $a \in \Z$.
+\end{subproblem}
+
+\begin{subproblem}
+  $\floor{a} = \ceil{a}$ for all $a \in \R$.
+\end{subproblem}
+
+\begin{subproblem}
+  $\floor{a} = \ceil{a} - 1$ for all $a \in \R - \Z$.
+\end{subproblem}
+
+\begin{subproblem}
+  $-\ceil{a} = \ceil{-a}$ for all $a \in \R$.
+\end{subproblem}
+
+\begin{problem}
+  Find all the real numbers $x$ such that
+\end{problem}
+
+\begin{subproblem}
+  $7 \floor{x} = \floor{7x}$
+\end{subproblem}
+
+\begin{subproblem}
+  $\floor{7x} = 7$
+\end{subproblem}
+
+\begin{subproblem}
+  $\floor{x + 7} = x + 7$
+\end{subproblem}
+
+\begin{subproblem}
+  $\floor{x + 7} = \floor{x} + 7$
+\end{subproblem}
+
+
+\seksjon{5.3}
+
+\begin{problem}[2]
+  For each of the following functions $f \colon \Z \to \Z$, determine whether
+  the function is one-to-one and whether it is onto. If the function is not
+  into, determine the range $f(\Z)$.
+\end{problem}
+
+\begin{subproblem}[2]
+  $f(x) = 2x - 3$
+\end{subproblem}
+
+\begin{subproblem}[4]
+  $f(x) = x^2$
+\end{subproblem}
+
+\begin{subproblem}
+  $f(x) = x^3$
+\end{subproblem}
+
+\begin{problem}
+  For each of the following functions $g \colon \R \to \R$, determine whether
+  the function is one-to-one and whether it is onto. If the function is not
+  into, determine the range $f(\R)$.
+\end{problem}
+
+\begin{subproblem}[2]
+  $f(x) = 2x - 3$
+\end{subproblem}
+
+\begin{subproblem}[4]
+  $f(x) = x^2$
+\end{subproblem}
+
+\begin{subproblem}
+  $f(x) = x^3$
+\end{subproblem}
+
+\begin{problem}
+  Let $A = {1, 2, 3, 4}$ and $B = \{1, 2, 3, 4, 5, 6\}$.
+\end{problem}
+
+\begin{subproblem}
+  How many functions are there from $A$ to $B$? How many of these are
+  one-to-one? How many are onto?
+\end{subproblem}
+
+\begin{subproblem}
+  How many functions are there from $B$ to $A$? How many of these are
+  onto? How many are one-to-one?
+\end{subproblem}
+
+\end{document}
