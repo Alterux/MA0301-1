@@ -94,9 +94,21 @@ itemjoin={\tab},#1]}%
 % ===================================
 % Mathematics 
 % ===================================
+    \usepackage{commath}
+    \let\oldabs\abs   % <-- Store original \norm as \oldnorm
+    \let\abs\undefined % <-- "Undefine" \norm
+    \DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+    \let\oldnorm\norm   % <-- Store original \norm as \oldnorm
+    \let\norm\undefined % <-- "Undefine" \norm
+    \DeclarePairedDelimiter\norm{\lVert}{\rVert}
+    \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+    \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+    
     \usepackage{mathrsfs}
-    \newcommand{\Z}{\mathbb{Z}}
     \newcommand{\N}{\mathbb{N}}
+    \newcommand{\Z}{\mathbb{Z}}
+    \newcommand{\R}{\mathbb{R}}
+    \newcommand{\Q}{\mathbb{Q}}
     \newcommand{\C}{\mathbb{C}}
     \newcommand{\U}{\mathscr{U}}
     \newcommand{\RR}{\mathscr{R}}
