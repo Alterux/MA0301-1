@@ -1,0 +1,448 @@
+\documentclass[a4paper, english, 12pt]{article} % norsk & english is supported
+
+\newcommand{\exerciseNumber}{7}
+\newcommand{\solutions}{true} % Change to   true   to create solutions
+% Must be defined before course package, \exerciseNumber, and \solutions
+\usepackage{IMF}
+
+\usepackage{MA0301}
+
+\begin{document}
+
+\titlebox
+
+\seksjon{5.2}
+
+\begin{problem}
+  Determine whether or not each of the following relations is a function. If a
+  relation is a function, find its range.
+\end{problem}
+
+\begin{subproblem}[3]
+  $\{ (x, y) \mid x,y \in \R, \ y = 3x^2 + 1 \}$, a relation from $\R$ to $\R$
+\end{subproblem}
+
+\begin{answer}
+  In mathematics, a function is a relation between a set of inputs and a set
+  of permissible outputs with the property that each input is related to exactly
+  one output.
+  %
+  As this is the case here, every input $y$ is related exactly to one output,
+  namely $3x^2 + 1$. The range is $\{7,\,8,\,11,\,16,23,\ldots\}$ or more
+  succinctly $\{x \in \R \mid 3x^2 + 1\}$.
+\end{answer}
+
+\begin{subproblem}
+  $\{ (x, y) \mid x,y \in \Q, \ x^2 + y^2 = 1 \}$, a relation from $\Q$ to $\Q$
+\end{subproblem}
+
+\begin{answer}
+  This is a relation, and not a function. Both $(\sqrt{1-x^2}, y)$ and
+  $(-\sqrt{1-x^2}, y)$ are in the relation for $x,y\in \Q$. More concretely
+  $x=0$ corresponds to both $y=0$ and $y=1$. 
+\end{answer}
+
+\begin{subproblem}
+  $\RR$ is a relation from $A$ to $B$ where $\abs{A}=5$ and $\abs{B}=6$, and $\abs{\RR}=6$.
+\end{subproblem}
+
+\begin{answer}
+  Since $6 = \abs{\RR} > \abs{A} = 5$, $\RR$ cannot be a function. Perhaps this
+  is easier to see with a a concrete example, let $A = \{a,b,c,d,e\}$, and $B =
+  \{1,2,3,4,5,6\}$. If $\abs{\RR}=6$, then $\RR$ has to contain some element of
+  $A$ \emph{twice}, and thus, it cannot be a function.
+
+  For an example if
+$\RR = \{ (a,1), (b,1), (c,1), (d,1), (e,1) \}$, then $\RR$ is a function as every
+element in $A$ is mapped exactly to one value in $B$, and $\abs{\RR}= 5$.
+However, as every element in $A$ is already used, we can not add another element
+to $\RR$ without mapping an element in $A$ to two different elements in $B$.
+We can not be ''clever`` either and try to add the same element twice, as an intrinsic
+property of sets are that they consists of only unique elements. Example:
+$\{1,1,1,2\} = \{1,2\}$.
+\end{answer}
+
+\begin{problem}[3]
+  Let $A = \{1, 2, 3, 4\}$ and $B = \{x, y, z\}$.
+\end{problem}
+
+
+\begin{subproblem}
+  List five functions from $a$ to $b$.
+\end{subproblem}
+
+\begin{answer}
+  \noindent
+  We need to make sure to never map a single element in $A$ to two
+  different element in $B$.
+  \begin{align*}
+  & \{ (1,x), (2,x), (3,x), (4,x) \}, \\
+  & \{ (1,y), (2,y), (3,y), (4,y) \},  \\
+  & \{ (1,z), (2,z), (3,z), (4,z) \}, \\
+  & \{ (1,x), (2,y), (3,z), (4,x) \}, \\
+  & \{ (1,y), (2,z), (3,x), (4,y) \}, 
+  \end{align*}
+\end{answer}
+
+\begin{subproblem}
+  How many functions $f \colon A \to B$ are there?
+\end{subproblem}
+
+\begin{answer}
+  Every value in $A$ can be mapped to three different values in $B$. Thus, there
+  can be in total $\abs{A}^{\abs{B}} = 4^3 = 64$ different functions from $A$ to
+  $B$.
+\end{answer}
+
+\begin{subproblem}
+  How many functions $f \colon A \to B$ are one-to-one?
+\end{subproblem}
+
+\begin{answer}
+  In order for a function to be one-to-one \emph{every} element in $A$ must map to a
+  \emph{different} element in $B$. As our range is smaller than our domain
+  $\abs{B}<\abs{A}$, there can not exists any functions $f \colon A \to B$ that are one-to-one.
+\end{answer}
+
+\begin{subproblem}
+  How many functions $g \colon B \to A$ are there?
+\end{subproblem}
+
+\begin{answer}
+  Similar as before. Every element in $B$ can now be mapped to $4$ different
+  values in $A$. Thus, there can be in total $\abs{B}^{\abs{A}}= 3^4 = 81$
+  different functions from $B$ to $A$. 
+\end{answer}
+
+\begin{subproblem}
+  How many functions $g \colon B \to A$ are one-to-one?
+\end{subproblem}
+
+\begin{answer}
+  For $x$ we have $4$ different choices for values, for $y$ we are now left with
+  $3$ choices (as they have to map to unique values), for the last value $z$
+  there are $2$ values left to choose from. In total there are a total of $4
+  \cdot 3 \cdot 2 = 24$ functions $g \colon B \to A$ that are one-to-one.
+\end{answer}
+
+\begin{subproblem}
+  How many functions $f \colon A \to B$ satisfy $f(1) = x$?
+\end{subproblem}
+
+\begin{answer}
+  The remaining $3$ values in $A$ can still be mapped to any of the $3$ values
+  in $B$. Thus, there is a total of $\abs{B}^{\abs{A}-1} = 3^3 = 27$ functions
+  $f \colon A \to B$ that satisfies $f(1) = x$.
+\end{answer}
+
+\begin{subproblem}
+  How many functions $f \colon A \to B$ satisfy $f(1) = f(2) = x$?
+\end{subproblem}
+
+\begin{answer}
+  The remaining $2$ values in $A$ can still be mapped to any of the $3$ values
+  in $B$. Thus, there is a total of $\abs{B}^{\abs{A}-2} = 3^2 = 9$ functions
+  $f \colon A \to B$ that satisfies $f(1) = f(2) = x$.
+\end{answer}
+
+\begin{subproblem}
+  How many functions $f \colon A \to B$ satisfy $f(1) = x$ and $f(2) = y$?
+\end{subproblem}
+
+\begin{answer}
+  Whether $f(2)$ is mapped to $x$ or $y$ makes no difference. 
+  The remaining $2$ values in $A$ can still be mapped to any of the $3$ values
+  in $B$. Thus, there is a total of $\abs{B}^{\abs{A}-2} = 3^2 = 9$ functions
+  $f \colon A \to B$ that satisfies $f(1) = x$ and $f(2) = y$.
+\end{answer}
+
+\begin{problem}[5]
+  Let $A. B, C \subset \R^2$ where $A = \{(x,y) \mid y = 2x + 1\}$, $B = \{(x,y)
+  \mid y = 3x\}$, and $C = \{(x, y) \mid x - y = 7\}$. Determine each of the following:
+\end{problem}
+
+\begin{subproblem}[3]
+  $\overline{\overline{A} \cup \overline{C}}$
+\end{subproblem}
+
+\begin{answer}
+  By De Morgans laws and the law of inverses we have
+  \begin{align*}
+      \overline{\overline{A} \cup \overline{C}}
+    = \overline{\overline{A}} \cap \overline{\overline{C}}
+    = A \cap C 
+    = \{(x,y) \mid y = 2x + 1 \ \text{and} \ x - y  = 7 \}.
+  \end{align*}
+  Adding these two equations gives $x = 2x + 8$, thus $x=-8$ and $y=2x+1=-15$.
+  As such we have $\overline{\overline{A} \cup \overline{C}} = \{(-8, -15)\}$
+  which is what we wanted to find.
+\end{answer}
+
+\begin{subproblem}
+  $\overline{B} \cup \overline{C}$
+\end{subproblem}
+
+\begin{answer}
+  Again by De Morgans laws we have
+  $\overline{B} \cup \overline{C} = \overline{B \cap C}$ and now as before
+  %
+  \begin{align*}
+    B \cap C = \{(x,y) \mid y = 3x \ \text{and} \ x - y = 7\}
+  \end{align*}
+  %
+  Insertion gives $x - 3x=7$ implying $x=-7/2$ and $y=-21/2$. Since $B \cap C =
+  \{(-7/2,-21/2)\}$
+  we have $\overline{B} \cup \overline{C} = \R^2 - \{(-7/2,-21/2)\}$.
+\end{answer}
+
+\begin{problem}[8]
+  Determine whether each of the following statements is true or false. If the
+  statement is false, provide a counterexample
+\end{problem}
+
+\begin{subproblem}
+  $\floor{a} = \ceil{a}$ for all $a \in \Z$.
+\end{subproblem}
+
+\begin{answer}
+  \paragraph{True:} $\floor{a} = a$ and $\ceil{a} = a$ for every whole number $a
+  \in \Z$.
+\end{answer}
+
+\begin{subproblem}
+  $\floor{a} = \ceil{a}$ for all $a \in \R$.
+\end{subproblem}
+
+\begin{answer}
+  \paragraph{False:} Let $a = n + \frac{1}{n+1}$, where $n \in \N$ then
+  $\floor{n + \frac{1}{n+1}} = n$ but $\ceil{n + \frac{1}{n+1}} = n+1$.
+\end{answer}
+
+\begin{subproblem}
+  $\floor{a} = \ceil{a} - 1$ for all $a \in \R - \Z$.
+\end{subproblem}
+
+\begin{answer}
+  \paragraph{True: } If $a \in \R - \Z$, then $a$ has to have a non-zero
+  remainder (otherwise it would be an integer), as such we can write $a = b +
+  r$, where $0 < r < 1$ and $b \in \R$. Then, $\floor{a} = \floor{b+r}=b$ and
+  $\ceil{a}-1 = \ceil{b+r}-1 = (b+1)-1 = b$. 
+\end{answer}
+
+\begin{subproblem}
+  $-\ceil{a} = \ceil{-a}$ for all $a \in \R$.
+\end{subproblem}
+
+\begin{answer}
+  \paragraph{False: } Let once again $a \in \R - \Z$ meaning $a = b + r$ with $0
+  < r < 1$. Then, $-\ceil{a} = -\ceil{b+r} = -(b+1)=-b-1$, but
+  $\ceil{-a}=\ceil{-(b+r)}=-b$. You might want to use $a = 1.25$ or some other
+  fraction to see this clearer.
+\end{answer}
+
+\begin{problem}
+  Find all the real numbers $x$ such that
+\end{problem}
+
+\begin{subproblem}
+  $7 \floor{x} = \floor{7x}$
+\end{subproblem}
+
+\begin{answer}
+  Let $x = b + r$ where $b\in \Z$ and $0 \leq r < 1$. Then $7 \floor{x} = 7
+  \floor{b + r} = 7b + 7 \floor{r}$, on the other side $\floor{7x} = \floor{7b +
+    7r} = 7b + \floor{7r}$. So we need $7\floor{r} = \floor{7r}$ for the
+  equality to hold. Since $0 \leq r < 1$ we have $7\floor{r} = 0$ for all $r$.
+  In order for $\floor{7r} = 0$ as well, we need to enforce the restriction $0
+  \leq r < 1/7$.
+
+  So the equality holds for all $x = b + r$ with $b \in \Z$ and $0 \leq r <
+  1/7$. We could write
+  \begin{equation}
+    x \in \bigcup_{k \in \Z} [k,k+1/7)
+    = \cdots \cup [-1,-6/7] \cup [0,1/7) \cup [1,8/7) \cup \cdots\,,
+  \end{equation}
+  if we wanted to showoff our mathematical prowess ...
+\end{answer}
+
+\begin{subproblem}
+  $\floor{7x} = 7$
+\end{subproblem}
+
+\begin{answer}
+  We can assume without loss of generality that $x = b +r$ where $0 \leq r < 1$
+  and $b \in \Z$. Then, $\floor{7x} = \floor{7b + 7r} = 7b + \floor{7r}$. In
+  order for this to be equal to $7$, we need that $b = 1$ and $0 \leq r < 1/7$.
+  Thus the equality $\floor{7x} = 7$ holds for all $1 \leq x < 1 + 1/7$, or $x
+  \in [1,8/7)$.
+\end{answer}
+
+\begin{subproblem}
+  $\floor{x + 7} = x + 7$
+\end{subproblem}
+
+\begin{answer}
+  Let $x \in \N$, then $\floor{x + 7} = \floor{x} + 7 = x + 7$ as wanted.
+\end{answer}
+
+\begin{subproblem}
+  $\floor{x + 7} = \floor{x} + 7$
+\end{subproblem}
+
+\begin{answer}
+  Holds for all $x \in \R$, as integers are unaffected by the ceil and
+  floor-functions. 
+\end{answer}
+
+
+\seksjon{5.3}
+
+\begin{problem}[2]
+  For each of the following functions $f \colon \Z \to \Z$, determine whether
+  the function is one-to-one and whether it is onto. If the function is not
+  onto, determine the range $f(\Z)$.
+\end{problem}
+
+\begin{subproblem}[2]
+  $f(x) = 2x - 3$
+\end{subproblem}
+
+\begin{answer}
+  This function is one-to-one $x = \bigl(  f(x) + 3 \bigr)/2$. Thus, each $x$ is
+  mapped to an unique $f(x)$ and vice-versa. However it only covers the odd
+  integers, as such it is not onto. The range are the odd integers $x \in 2\Z + 1$.
+\end{answer}
+
+\begin{subproblem}[4]
+  $f(x) = x^2$
+\end{subproblem}
+
+\begin{answer}
+  This is not one-to-one as $f(-n) = f(n)$, similarly it is not onto as it only
+  targets the square numbers. The range is thus $x \in \N^2$ or more commonly $f
+  = \{0,1,4,9,16,\ldots\}$ 
+\end{answer}
+
+\begin{subproblem}[6]
+  $f(x) = x^3$
+\end{subproblem}
+
+\begin{answer}
+  As $f'(x) = 3x^2 > 0$ our function $f$ is non-decreasing, and as
+  such one-to-one. However again not every element in $\Z$ lies in its range,
+  only the cubic numbers, $\{0,1,8,27,64,\ldots\}$ as such it is not onto. 
+\end{answer}
+
+\begin{problem}
+  For each of the following functions $g \colon \R \to \R$, determine whether
+  the function is one-to-one and whether it is onto. If the function is not
+  into, determine the range $f(\R)$.
+\end{problem}
+
+\begin{subproblem}[2]
+  $f(x) = 2x - 3$
+\end{subproblem}
+
+\begin{answer}
+  This function is one-to-one and onto. $f \colon \R \to \R$. Let $y \in \R$
+  then we can find an $x$ such that $f(x) = y$ for every $y \in \R$.
+\end{answer}
+
+\begin{subproblem}[4]
+  $f(x) = x^2$
+\end{subproblem}
+
+\begin{answer}
+  As before this function not one-to-one as $f(-x)=f(x)$ for all $x \in \R$.
+  Let $y<0$, then there does not exists an $x \in \R$ such that $f(x) = y$,
+  hence it is not onto. The range is $[0,\infty)$.
+\end{answer}
+
+\begin{subproblem}[6]
+  $f(x) = x^3$
+\end{subproblem}
+
+\begin{answer}
+  As before this function is non-decreasing and as such one-to-one. For every $y
+  \in \R$ there exists an $x$ such that $f(x) = y$, let $x = \sqrt[3]{y}$. Thus,
+  the function is onto as well.
+\end{answer}
+
+\begin{problem}
+  Let $A = \{1, 2, 3, 4\}$ and $B = \{1, 2, 3, 4, 5, 6\}$.
+\end{problem}
+
+\begin{subproblem}
+  How many functions are there from $A$ to $B$? How many of these are
+  one-to-one? How many are onto?
+\end{subproblem}
+
+\begin{answer}
+  There are $\abs{B}^{\abs{A}} = 6^4 = 7776$ functions from $A$ to $B$. If the
+  function is one-to-one every element in $A$ is mapped to a different value in
+  $B$. So the number of functions that are one-to-one are $6 \cdot 5 \cdot 4
+  \cdot 3 = 6!/2! = 360$. There are more elements in $B$ than in $A$, thus there
+  are $0$ functions that are onto.
+\end{answer}
+
+\begin{subproblem}
+  How many functions are there from $B$ to $A$? How many of these are
+  onto? How many are one-to-one?
+\end{subproblem}
+
+\begin{problem}
+  There are $\abs{A}^{\abs{B}} = 4^6 = 4096$ functions from $B$ to $A$. As there
+  are more elements in $B$ than in $A$, every element in $B$ can not be mapped
+  to an unique element in $A$, as such there are no one-to-one functions. The
+  number of onto functions is $4! {6 \brace 4} = 1560$. Where a more throughout
+  explanation on how this number arises is given below.
+
+  To find the number of functions that are onto we’ll use an
+  \href{https://en.wikipedia.org/wiki/Inclusion\%E2\%80\%93exclusion_principle}{inclusion-exclusion}
+  argument. In general, if $\abs{\Bbb A} = m$ and $\abs{\Bbb B} = n$ there are
+  $n^m$ functions of all kinds from $\Bbb A$ to $\Bbb B$. Obviously if $m<n$,
+  there are no function from $\Bbb A$ onto $\Bbb B$, so assume that $m\ge n$. If
+  $b\in\Bbb B$, there are $(n-1)^m$ functions from $\Bbb A$ to $\Bbb
+  B\setminus\{b\}$, i.e., functions whose ranges do not include $b$. We need to
+  subtract these from the original $n^m$, and we need to do it for each of the
+  $n$ members of $\Bbb B$, so a better approximation is $n^m-n(n-1)^m$.
+
+  Unfortunately, a function whose range misses \emph{two} members of $\Bbb B$ gets
+  subtracted twice in that computation, and it should be subtracted only once.
+  Thus, we have to add back in the functions whose ranges miss at least two
+  points of $\Bbb B$. If $b_0,b_1\in\Bbb B$, there are $(n-2)^m$ functions from
+  $\Bbb A$ to $\Bbb B\setminus\{b_0,b_1\}$, and there are $\binom{n}{2}$ pairs
+  of points of $\Bbb B$, so we have to add back in $\binom{n}2(n-2)^m$ to get
+  %
+  \begin{equation*}
+    n^m-n(n-1)^m+\binom{n}2(n-2)^m\;,
+  \end{equation*}
+  % 
+  which can be expressed more systematically as
+  %
+  \begin{equation*}
+    \binom{n}0n^m-\binom{n}1(n-1)^m+\binom{n}2(n-2)^m\;.
+  \end{equation*}
+  %
+  Unfortunately, this over-corrects in the other direction, by adding back in
+  too much. The final result, when the entire inclusion-exclusion computation is
+  made, is
+  %
+  \begin{equation*}
+    \sum_{k=0}^n(-1)^k\binom{n}k(n-k)^m\;,
+  \end{equation*}
+  %
+  which can also be written
+  %
+  \begin{equation*}
+    n!{m\brace n} = n! \cdot S(m,n)\;,
+  \end{equation*}
+  %
+  where $S(m,n) = {m\brace n}$ is a
+  \href{http://en.wikipedia.org/wiki/Stirling_numbers_of_the_second_kind}{Stirling
+    number of the second kind}. The Stirling number gives the number of ways of
+  dividing up $\Bbb A$ into $n$ non-empty pieces, and the $n!$ then gives the
+  number of ways of assigning those pieces to the $n$ elements of $\Bbb B$.
+\end{problem}
+
+\end{document}
