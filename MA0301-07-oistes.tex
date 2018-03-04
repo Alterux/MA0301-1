@@ -27,7 +27,7 @@
   of permissible outputs with the property that each input is related to exactly
   one output.
   %
-  As this is the case here, every input $y$ is related exactly to one output,
+  Thus this relation is a \emph{function} as every input $y$ is related exactly to one output,
   namely $3x^2 + 1$. The range is $\{7,\,8,\,11,\,16,23,\ldots\}$ or more
   succinctly $\{x \in \R \mid 3x^2 + 1\}$.
 \end{answer}
@@ -37,9 +37,20 @@
 \end{subproblem}
 
 \begin{answer}
-  This is a relation, and not a function. Both $(\sqrt{1-x^2}, y)$ and
-  $(-\sqrt{1-x^2}, y)$ are in the relation for $x,y\in \Q$. More concretely
-  $x=0$ corresponds to both $y=0$ and $y=1$. 
+  This is \emph{not} a function as both $(0,1)$ and $(0,-1)$ lie on the unit
+  circle. Thus we have one input $x=0$ related to \emph{two} outputs $y=1$, $y=-1$.
+  More generally all the rational points on the unit
+  circle can be described as
+  %
+  \begin{equation*}
+    \left( \frac{1 - t^2}{1 + t^2} ,\ \frac{2t}{1 + t^2} \right), \qquad t \in \Q
+  \end{equation*}
+  %
+  Setting $t=-t$ we have $(\frac{1-t^2}{1+t^2}, \, - \frac{2t}{1+t^2})$, as such
+  the input $x = \frac{1-t^2}{1+t^2}$ corresponds to two outputs $y=\pm
+  \frac{2t}{1+t^2}$. Showing that there are an \emph{infinite} amount of points
+  prohibiting the circle from being a function. This should be clear by just
+  looking at a picture of the circle as well. 
 \end{answer}
 
 \begin{subproblem}
@@ -390,7 +401,7 @@ $\{1,1,1,2\} = \{1,2\}$.
   onto? How many are one-to-one?
 \end{subproblem}
 
-\begin{problem}
+\begin{answer}
   There are $\abs{A}^{\abs{B}} = 4^6 = 4096$ functions from $B$ to $A$. As there
   are more elements in $B$ than in $A$, every element in $B$ can not be mapped
   to an unique element in $A$, as such there are no one-to-one functions. The
@@ -443,6 +454,6 @@ $\{1,1,1,2\} = \{1,2\}$.
     number of the second kind}. The Stirling number gives the number of ways of
   dividing up $\Bbb A$ into $n$ non-empty pieces, and the $n!$ then gives the
   number of ways of assigning those pieces to the $n$ elements of $\Bbb B$.
-\end{problem}
+\end{answer}
 
 \end{document}
