@@ -68,6 +68,7 @@
     \usepackage{array}   % for \newcolumntype macro
     \newcolumntype{L}{>{$}l<{$}} % math-mode version of "l" column type
     \newcolumntype{C}{>{$}c<{$}} % math-mode version of "l" column type
+    \newcolumntype{R}{>{$}r<{$}} % math-mode version of "l" column type
     \newcommand{\F}{\text{F}}
     \newcommand{\T}{\text{T}}
     \newcommand{\1}{\textbf{1}}
@@ -135,5 +136,11 @@ itemjoin={\tab},#1]}%
     \Crefname{tempCounter}{\IfLanguageName{norsk}{Steg}{Step}}{\IfLanguageName{norsk}{Steg}{Steps}}
     \creflabelformat{tempCounter}{#2(\textcolor{\linkcolor}{#1})#3}
 
-    \crefname{subproblemListi}{\IfLanguageName{norsk}{steg}{step}}{\IfLanguageName{norsk}{steg}{steps}}
-    \Crefname{subproblemListi}{\IfLanguageName{norsk}{Steg}{Step}}{\IfLanguageName{norsk}{Steg}{Steps}}
+    \crefname{subproblemListi}{\IfLanguageName{norsk}{del}{part}}{\IfLanguageName{norsk}{del}{parts}}
+    \Crefname{subproblemListi}{\IfLanguageName{norsk}{Del}{Part}}{\IfLanguageName{norsk}{Del}{Parts}}
+    
+    \crefname{problemListi}{\IfLanguageName{norsk}{oppgave}{problem}}{\IfLanguageName{norsk}{oppgave}{problems}}
+    \Crefname{problemListi}{\IfLanguageName{norsk}{Oppgave}{Problem}}{\IfLanguageName{norsk}{Oppgave}{Problems}}
+
+    \newcommand{\gref}[2]{\hyperref[#1]{#2~\labelcref{#1}}}
+    \DeclareRobustCommand{\eulerian}{\genfrac<>{0pt}{}}
