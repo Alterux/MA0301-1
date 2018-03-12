@@ -84,7 +84,7 @@ digraph/.style={draw, postaction={decorate,
 
 \begin{answer}
  As $q \to q$ is a tautology in itself, we have $ (p \vee q) \to T_0$. Which is
- only false if $(p \vee q)$ is False and $T_0$ is True. However, $T_0$ is always
+ only false if $(p \vee q)$ is True and $T_0$ is False. However, $T_0$ is always
  True, as such $(p \vee q) \to [q \to q]$ is always True, and thus a tautology.
 
  However, this proof does not use \cref{subproblem:14a}. Let us remedy this with
@@ -199,6 +199,7 @@ digraph/.style={draw, postaction={decorate,
   \href{https://en.wikipedia.org/wiki/Pascal\%27s_rule}{Pascal's rule} is used
   %
   \begin{equation}
+    \label{eq:pascals-rule}
     \binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k}\,,
   \end{equation}
   %
@@ -226,8 +227,9 @@ digraph/.style={draw, postaction={decorate,
   % 
   The elements in the $n$'th row is the sum of two elements from the $n-1$'th
   row. Take the last row in the table as a concrete example, then $1 = 0 + 1$,
-  $7 = 1 + 6$, $21 = 6 + 15$, $35 = 15 + 20$ and so forth.
-
+  $7 = 1 + 6$, $21 = 6 + 15$, $35 = 15 + 20$ and so forth. Let us prove the
+  \gref{eq:hockey-stick}{hockey-stick identity} using induction.
+  %
   \textbf{Base case:} Let $n = r$;
   %
   \begin{equation*}
@@ -250,8 +252,9 @@ digraph/.style={draw, postaction={decorate,
     = \binom{k+2}{r+1}\,,
   \end{equation*}
   %
-  and the rest follows by induction. This proves \cref{eq:hockey-stick} and
-  thus concludes the proof.
+  where \gref{eq:pascals-rule}{pascal's rule} where used in the last equality
+  and the rest follows by induction. This proves the
+  \gref{eq:hockey-stick}{hockey-stick identity} and thus concludes the proof.
 \end{answer}
 
 \begin{subproblem}
@@ -287,9 +290,11 @@ digraph/.style={draw, postaction={decorate,
     A(n, m) = (m + 1) A(n - 1, m) + (n - m)A(n - 1, m - 1)
   \end{equation}
   %
-  with initial condition $A(0,0)=1$. While this recurrence can be used to prove
-  \cref{{eq:worpitzky}} let's instead give a brief combinatorial proof of this
-  identity. 
+  with initial condition $A(0,0)=1$. For a given value of $n > 0$, the index $m$
+  in $A(n, m)$ can take values from $0$ to $n - 1$, otherwise $A(n,m) =0$ if $m
+  \geq n$. While this recurrence can be used to prove
+  \gref{eq:worpitzky}{Worpitzky’s identity} let's first give a brief
+  combinatorial proof of this identity.
 
   Let $\sigma$ be a permutation on $n$ letters. We will call an index $1 \le i
   \le n$ an index of descent if $\sigma(i) > \sigma(i+1)$ or if $i=n$, i.e. a
@@ -352,9 +357,10 @@ digraph/.style={draw, postaction={decorate,
     B(n,k) = k^n = \sum_{j=1}^k\binom{n+k-j}{n}A(n,j).
   \end{equation*}
   % 
-  By re-indexing as done in \cref{eq:reindex} we see that we have proven \cref{eq:worpitzky}
-  As a last step let us confirm that \cref{eq:worpitzky} gives us the same answer as trial
-  and error calculation from before:
+  By re-indexing as done in \cref{eq:reindex} we see that we have proven
+  \gref{eq:worpitzky}{Worpitzky’s identity}. As a last step let us confirm that
+  \cref{eq:worpitzky} gives us the same answer as trial and error calculation
+  from before:
   %
   \begin{align*}
     \sum_{\ell = 0}^{4-1} \binom{\ell + k}{4} A(4, \ell)
@@ -363,8 +369,8 @@ digraph/.style={draw, postaction={decorate,
   \end{align*}
   %
   Where the calculation of the Eulerian numbers were done by
-  \cref{eq:reccurrence} and \cref{fig:Euler-triangle} below. As an example $A(4,1) = (4 - 1) A(3, 0) + (1+1)A(3,1) =
-  3 \cdot 1 + 2 \cdot 4 = 11$.
+  \cref{eq:reccurrence} and \cref{fig:Euler-triangle} below. As an example
+  $A(4,1) = (4 - 1) A(3, 0) + (1+1)A(3,1) = 3 \cdot 1 + 2 \cdot 4 = 11$.
   %
   \begin{table}[H]
     \centering
@@ -379,6 +385,51 @@ digraph/.style={draw, postaction={decorate,
           4 & 1 & 11 & 11 & 1 
     \end{tabular}
   \end{table}
+  %
+  As a final step let us briefly outline a proof of
+  \gref{eq:worpitzky}{Worpitzky’s identity} using induction.
+  \begin{proof} Similar to
+  \gref{eq:pascals-rule}{pascal's rule} it can be show either through induction
+  or expanding the binomial coefficients that
+  %
+  \begin{equation}
+    \label{eq:Worpitzkys-lemma}
+    (m+1) \binom{k + m}{n + 1} + (n-m) \binom{k + m + 1}{n + 1} = k \binom{k + m}{k}
+  \end{equation}
+  %
+  \textbf{Base case:} Let $n=0$ then $k^0 = 1$ and the sum is also $1$ as
+  $A(0,0)=1$ and $\binom{k}{0}=1$ (There is exactly one way to choose $0$
+  elements from $k$). This proves the base case. \\
+  \textbf{Inductive step:} Suppose the identity holds for some $n \geq 0$ and
+  some fixed $k \in \Z_+$
+  %
+  \begin{equation*}
+    k^n = \sum_{m=0}^{n-1} \eulerian{n}{m} \binom{k + m}{n}\,.
+  \end{equation*}
+  %
+  Where the notation $A(n,m)=\eulerian{n}{m}$ is briefly introduced to save some
+  much needed space in the next step. Wish to show that this implies that it
+  holds for $n+1$. However,
+  %
+  \begin{align*}
+        \sum_{m=0}^{n}          \eulerian{n+1}{m} \binom{k + m}{n + 1} 
+    = & \sum_{m=0}^{n}  (m+1)   \eulerian{n}{m}   \binom{k+m}{n+1} 
+    +                  (n-m+1) \eulerian{n}{m-1} \binom{k+m}{n+1} \\
+    = & \sum_{m=0}^{n-1} (m+1)   \eulerian{n}{m}  \binom{k+m}{n+1} 
+    +                  (n-m)   \eulerian{n}{m}  \binom{k+m+1}{n+1} \\
+    = & k \sum_{m = 0}^{n-1} \eulerian{n}{m} \binom{k+m}{n} \\
+    = & k^{n+1}\,,
+  \end{align*}
+  %
+  where the first equality follows from the \gref{eq:reccurrence}{recurrence
+    relation of the Eulerian numbers}. In the second equality we noted that for the
+  first term in the sum, for $m=n$ we have $\eulerian{n}{n} = 0$ as such we only
+  need to sum up to $m=n-1$. For the last term for $m=0$ we have
+  $\eulerian{n}{0-1} = 0$ so the last term is zero for $m = 0$ as such we
+  re-index the last sum as $m = m + 1$. The third equality follows directly from
+  \cref{eq:Worpitzkys-lemma}. By the principle of induction,
+  \gref{eq:worpitzky}{Worpitzky’s identity} holds for all $k \in \Z_+$.
+  \end{proof}
 \end{answer}
 
 
@@ -436,8 +487,6 @@ digraph/.style={draw, postaction={decorate,
   Thus, $f = g$ which is what we wanted to prove.
 \end{answer}
 
-\newpageanswer
-
 \begin{problem}[27]
   With $A = \{x, y, z\}$, let $f, g \colon A \to A$ be given by $f = \{(x,y),
   (y,z), (z,x)\}$, $g = \{(x, y), (y, x), (z, z)\}$. Determine each of the
@@ -457,6 +506,8 @@ digraph/.style={draw, postaction={decorate,
     g^{-1} \circ f^{-1} & = \{  (x,z), (y,y), (z,x) \} 
   \end{align*}
 \end{answer}
+
+\newpageanswer
 
 \begin{problem}
   \begin{subproblem}
