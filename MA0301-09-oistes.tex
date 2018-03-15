@@ -1,0 +1,437 @@
+\documentclass[a4paper, english, 12pt]{article} % norsk & english is supported
+
+\newcommand{\exerciseNumber}{9}
+\newcommand{\solutions}{true} % Change to   true   to create solutions
+% Must be defined before course package, \exerciseNumber, and \solutions
+\usepackage{IMF}
+
+\usepackage{MA0301}
+
+\begin{document}
+
+\titlebox
+
+\seksjon{1, Supplementary Exercises}
+
+\begin{problem}[16]
+  \begin{subproblem}[2]
+    How many distinct terms are there in the complete expansion of
+    % 
+    \begin{equation*}
+      \left( \frac{x}{2} + y - 3z \right)^5 ?
+    \end{equation*}
+  \end{subproblem}
+\end{problem}
+
+\begin{answer}
+  The Multinomial Theorem states that
+  \begin{equation*}
+    \biggl( \sum_{i=1}^k x_i\biggr)^n = \sum_{n_1 + \dots + n_k = n} \binom{n}{n_1, \dots, n_k}x_1^{n_1}\dots x_k^{n_k}
+  \end{equation*}
+  %
+  where
+  %
+  \begin{equation*}
+    \binom{n}{n_1, \dots, n_k} = \frac{n!}{n_1!\dots n_k!}.
+  \end{equation*}
+  %
+  So the number of terms in the expansion is equal to the number of non-negative
+  solutions to the equation $n_1 + \dots + n_k = n$, which is
+  $\binom{n+k-1}{n}$ as is proved using the
+  \href{http://en.wikipedia.org/wiki/Stars_and_bars_(combinatorics)}{stars and
+    bars technique}. The number of distinct solutions is thus
+  %
+  \begin{align*}
+    \binom{5 + 3 - 1}{5} = \binom{7}{5} = \frac{7 \cdot 6}{2} = 21
+  \end{align*}
+\end{answer}
+
+\begin{subproblem}
+  What is the sum of all coefficients in the complete expansion?
+\end{subproblem}
+
+\begin{answer}
+  The sum of the coefficients of a polynomial is just the value that such
+  polynomial takes in 1, hence:
+  %
+  \begin{equation*}
+    p(1,1,1) = \left( \frac{1}{2} + 1 - 3 \right)^5 =- \left( \frac{3}{2} \right)^5
+    = - 7 - \frac{19}{32}
+  \end{equation*}
+\end{answer}
+
+\begin{problem}[18]
+  \begin{subproblem}[2]
+    Determine the number of non-negative integer solutions to the pair of
+    equations
+    % 
+    \begin{equation*}
+      x_1 + x_2 + x_3 \leq 6, \qquad x_1 + x_2 + \cdots + x_5 \leq 15
+    \end{equation*}
+    where $x_i \geq 0$ and $1 \leq i \leq 5$. 
+  \end{subproblem}
+\end{problem}
+
+\begin{answer}
+  Let $0 \leq k \leq 6$. For $x_1 + x_2 + x_3 = k$ there are $\binom{3 + k -
+    1}{k } = \binom{k+2}{k}$ solutions. Since $x_1 + x_2 + x_3 + x_4 + x_5 \leq
+  15$ this means that the remaining two numbers must satisfy $x_4 + x_5 \leq 15
+  - k$, consider $x_4 + x_5 = 15 - k$, $x_4, x_5 \geq 0$. Now there are
+  $\binom{2 + 15 - k - 1}{15 - k} = \binom{16 - k}{15 - k}$ solutions. Summing
+  for $0 \leq k \leq 6$ gives the total number of solutions
+  %
+  \begin{equation*}
+    \sum_{k = 0}^{6} \binom{k + 2}{k} \binom{16 - k}{15 - k} = 6132
+  \end{equation*}
+\end{answer}
+
+\begin{problem}[28]
+  \begin{subproblem}[2]
+    In how many ways can one travel in the $xy$-plane from $(1,2)$ to $(5, 9)$
+    if each move is one of the following types:
+    %
+    \begin{enumerate}
+      \item[(R):] $(x, y) \to (x + 1, y    )$ 
+      \item[(U):] $(x, y) \to (x    , y + 1)$
+      \item[(D):] $(x, y) \to (x + 1, y + 1)$
+    \end{enumerate} 
+  \end{subproblem}
+\end{problem}
+
+\begin{answer}
+  Since a diagonal moves takes the place of one horizontal move and one vertical
+  move, the number of diagonal moves is $0 \leq D \leq 4$. The resulting cases
+  are
+  \begin{align*}
+    &(0 D): \ (4R): \ (7U):  && 11!/(0!4!7!) \\
+    &(1 D): \ (3R): \ (6U):  && 10!/(1!3!6!) \\  
+    &(2 D): \ (2R): \ (5U):  && \phantom{1}9!/(2!2!5!) \\ 
+    &(3 D): \ (1R): \ (5U):  && \phantom{1}8!/(3!1!4!) \\
+    &(4 D): \ (0R): \ (3U):  && \phantom{1}7!/(4!0!3!) 
+  \end{align*}
+  The answer is the sum of these five possibilities
+  %
+  \begin{equation*}
+    \sum_{i=0}^{4} \frac{(11-i)!}{i!(4-i)!(7-i)!} = 2241
+  \end{equation*}
+\end{answer}
+
+
+
+\seksjon{2, Supplementary Exercises}
+
+\begin{problem}[7]
+  \begin{subproblem}
+    \label{subproblem:17a}
+    For primitive statements $p$, $q$, find the dual of the statement
+    %
+    \begin{equation*}
+      (\neg p \wedge \neg q) \vee (T_0 \wedge p) \vee p\,. 
+    \end{equation*}
+  \end{subproblem}
+\end{problem}
+
+\begin{answer}
+  Forming the dual just wants you to replace $p$ by $\neg p$ for each literal
+  $p$, $\vee$ by $\wedge$ and vice versa and $T_0$ by $F_0$. This gives
+  %
+  \begin{equation*}
+    (p \vee q) \wedge (F_0 \vee \neg p) \wedge \neg p.
+  \end{equation*}
+\end{answer}
+
+\begin{subproblem}
+  Use the laws of logic to show that your result from \cref{subproblem:17a} is
+  logically equivalent to
+  % 
+  \begin{equation*}
+    p \wedge \neg q.
+  \end{equation*}
+\end{subproblem} 
+
+\begin{answer}
+  By the Laws of Logic we have
+  \begin{align*}
+                          (p \vee q) \wedge (F_0 \vee \neg p) \wedge \neg p 
+    \Leftrightarrow \ & (p \vee q) \wedge \neg p \wedge \neg p
+    && \text{Identity laws}\\
+    \Leftrightarrow \ & (p \vee q) \wedge \neg p
+    && \text{Absorption laws}\\
+    \Leftrightarrow \ & (p \wedge \neg p) \vee (q \wedge \neg p)
+    && \text{Distributive laws:}\\
+    \Leftrightarrow \ & F_0 \vee (q \wedge \neg p)
+    && \text{Inverse laws}\\
+    \Leftrightarrow \ & q \wedge \neg p 
+    && \text{Identity laws}
+  \end{align*}
+  this is sort of what we wanted to show. The reason this diverges with the
+  statement above is that the book does not switch $p$ to $\neg p$, and $q$ to
+  $\neg q$ when finding the dual, which is stupid. 
+\end{answer}
+
+\begin{problem}[10]
+  Establish the validity of the argument
+  %
+  \begin{equation*}
+    [(p \to q) \wedge [(q \wedge r) \to s] \wedge r] \to (p \to s)\,.
+  \end{equation*}
+\end{problem}
+
+\begin{answer}
+  Just thinking about creating a truth table for this gives me an headache
+  %
+  \begin{align*}
+    \ & [(p \to q) \wedge [(q \wedge r) \to s] \wedge r] \to (p \to s)
+     && \textbf{Reasons}\\ 
+    \Leftrightarrow \ & \neg [(\neg p \vee q) \wedge [\neg (q \wedge r) \vee s] \wedge r] \vee (\neg p \vee s)
+     && \text{Material implication $a \to b \Leftrightarrow \neg a \vee b$} \\
+    \Leftrightarrow \ & \neg [(\neg p \vee q) \wedge [\neg q \vee \neg r \vee s] \wedge r] \vee (\neg p \vee s)
+     && \text{DeMorgans Laws $\neg (p \wedge q) = \neg p \vee \neg q$} \\
+    \Leftrightarrow \ & [\neg (\neg p \vee q) \vee \neg [\neg q \vee \neg r \vee s] \vee \neg r] \vee (\neg p \vee s)
+     && \text{DeMorgans Laws $\neg (p \wedge q) = \neg p \vee \neg q$} \\
+    \Leftrightarrow \ & (p \wedge \neg q) \vee [q \wedge r \wedge \neg s] \vee \neg r \vee (\neg p \vee s)
+     && \text{DeMorgans Laws $\neg (p \vee q) = \neg p \wedge \neg q$} \\
+    \Leftrightarrow \ & (p \wedge \neg q) \vee [q \wedge \neg s] \vee \neg r \vee (\neg p \vee s)
+     && \text{Absorption laws} \\
+    \Leftrightarrow \ & (p \wedge \neg q) \vee q \vee s \vee \neg r \vee \neg p
+     && \text{$(q \wedge \neg s) \vee s = q \vee s$} \\
+    \Leftrightarrow \ & p \vee q \vee s \vee \neg r \vee \neg p
+     && \text{$(p \wedge \neg q) \vee q = p \vee q$} \\
+    \Leftrightarrow \ & T_0 \vee q \vee s \vee \neg r 
+     && \text{Inverse Laws $p \vee \neg p \Leftrightarrow T_0$} \\
+    \Leftrightarrow \ & T_0
+     && \text{Domination laws} \\
+  \end{align*} 
+\end{answer}
+
+  
+
+\seksjon{3, Supplementary Exercises}
+
+\begin{problem}[4]
+  \begin{subproblem}
+    \label{subproblem:4a}
+    For positive integers $m$, $n$, $r$, with $r \leq \min(m, n)$, show that
+    % 
+    \begin{equation}
+      \label{eq:Chu-Vandermonde-Identity}
+      \binom{m + n}{r} = \sum_{k = 0}^r \binom{m}{k} \binom{n}{r - k}
+    \end{equation}
+  \end{subproblem}
+\end{problem}
+
+\begin{answer}
+  \Cref{{eq:Chu-Vandermonde-Identity}} is know as the Chu-Vandermonde Identity.
+  Let us briefly state two proofs for this interesting identity.
+  \begin{proof}[Algebraic proof]
+    Recall that for every $x,y \in \R$ we have that
+    %
+    \begin{equation}
+      (x + y)^n = \sum_{k = 0}^n \binom{n}{k} x^{n-k}y^k
+    \end{equation}
+    for all $n \in \Z^+$. This is know as the \emph{binomial theorem}. Now
+    %
+    we consider the binomial expansion of $(1+x)^{m+n}$
+    %
+    \begin{equation*}
+      (1 + x)^{m + n} = \sum_{k = 0}^{m + n} \binom{m + n}{k} x^k
+    \end{equation*}
+    %
+    Another way to expand the binomial is by first using
+    $(1+x)^{m+n} = (1+x)^m (1+x)^n$ then
+    %
+    \begin{align*}
+      (1+x)^{m+n}
+      & = (1+x)^m (1+x)^n \\
+      & = \biggl( \sum_{i=0}^m \binom{m}{i}  \biggr)
+      \biggl( \sum_{j=0}^n \binom{n}{j} x^j \biggr) \\
+      & = \left( \binom{m}{0} + \binom{m}{1}x + \binom{m}{2}x^2 + \cdots \right)
+        \cdot \left( \binom{n}{0} + \binom{n}{1}x + \binom{n}{2}x^2 + \cdots \right) \\
+      & = \left( \binom{m}{0}\binom{n}{0} \right) x^0
+        + \left( \binom{m}{0}\binom{n}{1} + \binom{m}{1}\binom{n}{0} \right)x^1 \\
+      & + \left( \binom{m}{0}\binom{n}{2} + \binom{m}{1}\binom{n}{1} + \binom{m}{2}\binom{n}{0} \right)x^2 + \cdots
+    \end{align*}
+    %
+    Thus, we can conclude that the coefficient of $x^k$ in the above expansion
+    is
+    %
+    \begin{equation*}
+      \binom{m}{0}\binom{n}{k} +
+      \binom{m}{1}\binom{n}{k-1} + \cdots +
+      \binom{m}{k}\binom{n}{0}
+      = \sum_{r = 0}^{k} \binom{m}{r} \binom{n}{k - r}
+    \end{equation*}
+    %
+    Therefore, by comparing the coefficients of $x^k$
+    %
+    \begin{equation*}
+      \sum_{r = 0}^k \binom{m}{k} \binom{n}{k - r} = \binom{m + n}{k}
+    \end{equation*}
+    %
+    which is what we wanted to show.
+  \end{proof}
+  \begin{proof}[Combinatorial Proof]
+    Suppose there are $m$ boys and $n$ girls in a class and you're asked to form
+    a team of $k$ pupils out of these $m+n$ students, with $0 \leq k \leq m +
+    n$. You can do this in $\binom{m+n}{k}$ ways. But, now we count in rather a
+    different manner. To form the team, you can choose $i$ boys and $k-i$ girls
+    for some fixed $k$. There are $\binom{m}{i}\binom{n}{k-1}$ ways to do this.
+    Now, either you can have $0$ boys and $k$ girls, or $1$ boy and $k-1$ girls,
+    or $2$ boys and $k-2$ girls, or $\ldots$. That is, there are $\sum_{r=0}^k
+    \binom{m}{r}\binom{n}{n-r}$ ways to form the team.
+
+    Thus, we derive at our result
+    %
+    \begin{equation*}
+      \sum_{r = 0}^k \binom{m}{k} \binom{n}{k - r} = \binom{m + n}{k} \qedhere
+    \end{equation*}
+    %
+  \end{proof}
+\end{answer}
+
+\begin{subproblem}
+  For $n$ a positive integer, show that
+  %
+  \begin{equation*}
+    \binom{2n}{n} = \sum_{k = 0}^{n} \binom{n}{k}^2
+  \end{equation*}
+\end{subproblem}
+
+\begin{answer}
+  Note that $\binom{n}{k}=\binom{n}{n-k}$ for all $n,k \in \N$ such that
+  %
+  \begin{equation*}
+    \sum_{k=0}^{n} \binom{n}{k}^2
+    = \sum_{k=0}^{n} \binom{n}{k} \binom{n}{n-k}
+    = \binom{n+n}{n} = \binom{2n}{n}
+  \end{equation*}
+  %
+  where \cref{subproblem:4a} was used in the second equality.
+\end{answer}
+
+\begin{problem}[9]
+  Let $A, B, C \in \U$. Prove that
+  %
+  \begin{equation*}
+    (A \cap B) \cup C = A \cap (B \cup C)
+  \end{equation*}
+  %
+  if and only if $ C \subseteq A$.
+\end{problem}
+
+\begin{answer}
+  First assume that $C \not \subseteq A$ this means there exists some element in $x
+  \in C$ such that $x \not\in A$. As $x \in C$ then $x \in (A \cap B) \cup C$,
+  however $x \not\in [A \cap (B \cup C)]$, since $x \not\in A$.
+
+  Assume now that $C \subseteq A$, this means for \emph{every} $y \in C$ then $y
+  \in A$. Pick some $x \in C$. Then $x \in B \cup C$ as $x \in C$, and $x \in [A
+  \cap (B \cup C)]$ since $x \in A$. On the other hand, $x \in C$ so $x \in [(A
+  \cap B) \cup C]$ and we are done.
+\end{answer}
+
+
+
+\seksjon{4, Supplementary Exercises}
+
+\begin{problem}[6]
+  For $n \in \Z^+$ define the sum $s_n$ by the formula
+  %
+  \begin{equation*}
+    s_n = \frac{1}{2!} + \frac{2}{3!} + \frac{3}{4!} + \cdots + \frac{(n-1)}{n!} + \frac{n}{(n+1)!}
+  \end{equation*}
+  % 
+  \begin{subproblem}[4]
+    Conjecture a formula for the sum of the terms in $s_n$ and verify your
+    conjecture for all $n \in \Z^+$ by the Principle of Mathematical Induction.
+  \end{subproblem}
+\end{problem}
+
+\begin{answer}
+  Testing a few values we see that
+  %
+  \begin{equation*}
+    s_4 = \frac{119}{120} = 1 - \frac{1}{5!}, \quad 
+    s_5 = \frac{719}{720} = 1 - \frac{1}{6!}, \quad \text{and} \quad
+    s_6 = \frac{5039}{5040} = 1 - \frac{1}{7!}\,,
+  \end{equation*}
+  %
+  and based on this calculation I conjecture that
+  %
+  \begin{equation*}
+    s_n = 1 - \frac{1}{(1+n)!} \qquad \forall \ n \in \Z^+\,.
+  \end{equation*}
+  %
+  \textbf{Base case:} $s_0 = 0$ and $1 - 1/0! = 0$. Perhaps more interestingly
+  is the case $n=1$, then $s_1 = 1/2!$ and $1 - 1/2! = 1/2!$. \\
+  \textbf{Inductive step:} Assume that the statement holds for some $n = k \in
+  \Z^+$ that is
+  %
+  \begin{equation*}
+    s_k = 1 - \frac{1}{(1+k)!}
+  \end{equation*}
+  %
+  wish to show that this implies that the statement holds for $n = k + 1$. Since
+  we have $1/(k+1)! = (k+2)/[(k+2)(k+1)!] = (k+2)/(k+2)!$, some elementary algebra gives
+  %
+  \begin{align*}
+    s_{k+1}   = s_{k} + \frac{k+1}{(k+2)!} 
+             & = 1 - \frac{1}{(1+k)!} + \frac{k+1}{(k+2)!} \\ 
+             & = 1 - \frac{k+2}{(k+2)} + \frac{k+1}{(k+2)!}
+             = 1 - \frac{1}{(k+2)!}\,,
+  \end{align*}
+  %
+  and the rest now follows by the Principle of Mathematical Induction.
+\end{answer}
+
+
+\begin{problem}
+  For all $n \in \Z$, $n \geq 0$ prove that
+  \begin{subproblem}[4]
+    $n^3 + (n+1)^3 + (n + 2)^3$ is divisible by $9$.
+  \end{subproblem}
+\end{problem}
+
+\begin{answer}
+  Every number is either divisible by 3, one away from being divisible by 3 or
+  two away from being divisible by 3. We can not be 3 away from being divisible
+  by 3, as $3$ is divisible by $3$. This can be written mathematically as
+  \begin{equation*}
+    n = 3k, \quad n = 3k + 1, \quad \text{or} \quad n = 3k + 2
+  \end{equation*}
+  %
+  Testing each of these cases gives
+  %
+  \begin{align*}
+    (3k)^3 + (3k+1)^3 + (3k + 1)^3 & = 9(9k^3 + 9k^2 + 5k + 1) \\ 
+    (3k+1)^3 + (3k+2)^3 + (3k + 3)^3 & = 9(9k^3 + 18k^2 + 14k + 4) \\ 
+    (3k+2)^3 + (3k+3)^3 + (3k + 4)^3 & = 9(9k^3 + 27k^2 + 29k + 11)  
+  \end{align*}
+  %
+  from which we can see that the expression on the right is always divisible by
+  $3$. Let us for completeness sake also prove the statement using induction. \\
+  \textbf{Base case:} For $n=0$ we have $0^3 + (0+1)^3 + (0+2)^3 = 0 + 1 + 8 = 9$,
+  and this proves the base case. \\
+  \textbf{Inductive step:} Assume that the statement holds for some $n = k \in \Z^+$
+  that is
+  %
+  \begin{equation*}
+    k^3 + (k+1)^3 + (k+2)^3 \ \text{is divisible by $9$.}
+  \end{equation*}
+  %
+  Wish to show that this implies that the statement holds for $n = k + 1$
+  %
+  \begin{align*}
+        (k+1)^3 + (k+2)^3 + [(k+3)^3]
+    & = (k+1)^3 + (k+2)^3 + [k^3 + 9k^2 + 27k + 27] \\
+    & = [k^3 + (k+1)^3 + (k+2)^3] + 9(k^2 + 3k + 3)
+  \end{align*}
+  %
+  by the induction hypothesis we know that the $9$ divides the expression in the
+  squared brackets, similarly it is trivial to see that $9$ divides $9(k^2 + 3k +
+  3)$. By the principle of induction $9$ divides $n^3 + (n+1)^3 + (n+2)^3$ for
+  all $n \in \Z^+$. 
+\end{answer}
+
+
+\end{document}
