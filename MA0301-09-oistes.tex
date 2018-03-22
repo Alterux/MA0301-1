@@ -26,7 +26,8 @@
 \begin{answer}
   The Multinomial Theorem states that
   \begin{equation*}
-    \biggl( \sum_{i=1}^k x_i\biggr)^n = \sum_{n_1 + \dots + n_k = n} \binom{n}{n_1, \dots, n_k}x_1^{n_1}\dots x_k^{n_k}
+    \biggl( \sum_{i=1}^k x_i\biggr)^n
+    = \sum_{n_1 + \dots + n_k = n} \binom{n}{n_1, \dots, n_k}x_1^{n_1}\dots x_k^{n_k}
   \end{equation*}
   %
   where
@@ -274,11 +275,12 @@
     Suppose there are $m$ boys and $n$ girls in a class and you're asked to form
     a team of $k$ pupils out of these $m+n$ students, with $0 \leq k \leq m +
     n$. You can do this in $\binom{m+n}{k}$ ways. But, now we count in rather a
-    different manner. To form the team, you can choose $i$ boys and $k-i$ girls
-    for some fixed $k$. There are $\binom{m}{i}\binom{n}{k-1}$ ways to do this.
-    Now, either you can have $0$ boys and $k$ girls, or $1$ boy and $k-1$ girls,
-    or $2$ boys and $k-2$ girls, or $\ldots$. That is, there are $\sum_{r=0}^k
-    \binom{m}{r}\binom{n}{n-r}$ ways to form the team.
+    different manner. To form the team, you can choose $r$ boys and $k-r$ girls
+    for some fixed $k$, and $0\leq r \leq k$. There are
+    $\binom{m}{r}\binom{n}{k-r}$ ways to do this. Now, either you can have $0$
+    boys and $k$ girls, or $1$ boy and $k-1$ girls, or $2$ boys and $k-2$ girls,
+    or $\ldots$. That is, in total there are $\sum_{r=0}^k
+    \binom{m}{r}\binom{n}{k-r}$ ways to form the team.
 
     Thus, we derive at our result
     %
@@ -298,12 +300,13 @@
 \end{subproblem}
 
 \begin{answer}
-  Note that $\binom{n}{k}=\binom{n}{n-k}$ for all $n,k \in \N$ such that
+  Note that $\binom{n}{k}=\binom{n}{n-k}$ for all $n,k \in \N$, either by
+  looking at pascals triangle, or direct computation, such that
   %
   \begin{equation*}
     \sum_{k=0}^{n} \binom{n}{k}^2
     = \sum_{k=0}^{n} \binom{n}{k} \binom{n}{n-k}
-    = \binom{n+n}{n} = \binom{2n}{n}
+    = \binom{n+n}{n} = \binom{2n}{n},
   \end{equation*}
   %
   where \cref{subproblem:4a} was used in the second equality.
@@ -377,7 +380,7 @@
   \begin{align*}
     s_{k+1}   = s_{k} + \frac{k+1}{(k+2)!} 
              & = 1 - \frac{1}{(1+k)!} + \frac{k+1}{(k+2)!} \\ 
-             & = 1 - \frac{k+2}{(k+2)} + \frac{k+1}{(k+2)!}
+             & = 1 - \frac{k+2}{(k+2)!} + \frac{k+1}{(k+2)!}
              = 1 - \frac{1}{(k+2)!}\,,
   \end{align*}
   %
