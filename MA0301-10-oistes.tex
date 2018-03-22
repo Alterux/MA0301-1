@@ -1,0 +1,671 @@
+\documentclass[a4paper, english, 12pt]{article} % norsk & english is supported
+
+\newcommand{\exerciseNumber}{10}
+\newcommand{\solutions}{true} % Change to   true   to create solutions
+% Must be defined before course package, \exerciseNumber, and \solutions
+\usepackage{IMF}
+
+\usepackage{MA0301}
+
+\usepackage{tikz}
+
+\newcommand{\labeledRectangle}[9]{%
+  \begin{tikzpicture}
+    \begin{scope}[execute at begin node=$, execute at end node=$]
+      \def\a{#1}
+      \draw[] (0,0)   -- (\a,0) node[near start, below] {#7} node[near end, below] {#6};
+      \draw[] (\a,0)   -- (\a,\a) node[near start, right] {#5} node[near end, right] {#4};
+      \draw[] (\a,\a)   -- (0,\a) node[near start, above] {#3} node[near end, above] {#2};
+      \draw[] (0,\a)   -- (0,0) node[near start, left] {#9} node[near end, left] {#8};
+    \end{scope}%
+  \end{tikzpicture}%
+}
+
+\begin{document}
+
+\titlebox
+
+\seksjon{1.1 \& 1.2}
+
+\begin{problem}[11]
+  Three small towns, designated by $A$, $B$, $C$ are interconnected by a system
+  of two-way roads, as shown in Fig. 4
+\end{problem}
+%
+\begin{figure}[h!tbp]
+  \centering
+  \begin{tikzpicture}
+    \matrix (m) [matrix of math nodes,
+    row sep=3em,
+    column sep=3em,
+    minimum width=2em,
+    nodes in empty cells, 
+    nodes={anchor=center}]
+    {
+      \node (A) {A}; &                    & \node (B) {B};    &                   & \node (C) {C}; \\
+      \node (D) {};  &                    &                   &                   & \node (E) {};\\
+    };
+    \path[draw] (A.east) -- node [midway,below] {$R_2$} (B.west);
+    \path[draw] (B.east) -- node [midway, below] {$R_6$} (C.west);
+
+    \path[draw] (A.north east) edge[bend left =45] node [midway, above] {$R_1$} (B.north west);
+    \path[draw] (A.south east) edge[bend right =45] node [midway, below] {$R_3$}(B.south west);
+    \path[draw] (A.south) edge[in = -90, out = -90, looseness = 1.5] node [midway, below] {$R_4$}(B.south);
+    
+    \path[draw] (B.north east) edge[bend left =45] node [midway, above] {$R_5$}(C.north west);
+    \path[draw] (B.south east) edge[bend right =45] node [midway, below] {$R_7$}(C.south west);
+
+    \path[draw] (A.north) edge[in=90,out=90] node [midway, below] {$R_8$} (C.north);
+    \path[draw] (A.south) edge [bend right = 45] (D.center)
+    (D.center) edge[bend right = 45] node[midway, above] {$R_9$} (E.center)
+    (E.center) edge [bend right = 40] (C);
+
+  \end{tikzpicture} 
+  \caption{}
+\end{figure}
+
+\begin{subproblem}
+  In how many ways can Linda travel from town $A$ to town $C$?
+\end{subproblem}
+
+\begin{answer}
+  To reach $C$ we can either go directly along $R_8$ or $R_9$, this gives $2$
+  paths, or travel through $B$. In the last case there are $4$ paths to $B$, and
+  for each of these there are $3$ paths from $B$ to $C$. In total
+  %
+  \begin{equation*}
+    \text{\# paths from $A$ to $C$:} \quad 2 + 4 \cdot 3 = 14.
+  \end{equation*}
+\end{answer}
+
+\begin{subproblem}
+  \label{subproblem:11b}
+  How many different round strips can Linda travel from town $A$ to town $C$ and
+  back to town $A$?
+\end{subproblem}
+
+\begin{answer}
+  From \cref{subproblem:11b} we know that there are $14$ paths from $A$ to $C$,
+  and since every path is a two-way path, this means there are $14$ paths from
+  $C$ to $A$. Thus, for each of the $14$ paths we have taken to reach $C$ we can
+  choose $14$ different paths to return. 
+  \begin{equation*}
+    \text{\# paths from $A$ to $C$ and back to $C$:} \quad 14^2 = 196.
+  \end{equation*}
+\end{answer}
+
+\begin{subproblem}
+  How many of the round trips in \cref{subproblem:11b} are such that the return
+  trip (from town $C$ to town $A$) is atleast partially different from the route
+  Linda takes from town $A$ to town $C$?
+\end{subproblem}
+
+\begin{answer}
+  There are $14$ paths from $A$ to $C$, thus once we have reached $C$ there are
+  $13$ paths that we have \emph{not} taken. Thus, to obtain a partially
+  different path, we just have to pick one of the $13$ paths not yet taken.
+  %
+  \begin{equation*}
+    \text{\# round trips $A \to C \to A$ with different return path:} \quad 14 \cdot 13 = 182.
+  \end{equation*}
+\end{answer}
+
+\begin{problem}[24]
+  Show that for all integers $n, r \geq 0$, if $n + 1 \geq r$ then
+  %
+  \begin{equation*}
+    P(n + 1, r) = \left( \frac{n + 1}{n + 1 - r} \right) P(n, r),
+  \end{equation*}
+  %
+  where $P(n, r) = n!/(n - r)!$ denotes the number of permutations.
+\end{problem}
+
+\begin{answer}
+  Using that $n! = n(n-1)!$ (Example: $5! = 5\cdot 4!$) gives us the relation directly
+  %
+  \begin{align*}
+    P(n + 1, r)
+    = \frac{(n+1)!}{(n+1-r)!}
+    = \frac{n+1}{n+1-r} \cdot \frac{n!}{(n-r)!}
+    = \frac{n+1}{n+1-r} P(n, r)
+  \end{align*}
+\end{answer}
+
+\begin{problem}
+  Find the values(s) of $n$ in each of the following:
+  \begin{enumerate}[label = (\alph*)]
+    \item $P(n, 2) = 90$
+    \item $P(n, 3) = 3 P(n, 2)$
+    \item $2 P(n, 2) + 50 = P(2n, 2)$
+  \end{enumerate}
+\end{problem}
+
+\begin{answer}
+  Note that for all $n \in \N$ we have
+  %
+  \begin{equation}
+    \label{eq:P(n2)}
+    P(n, 2) = \frac{n!}{(n - 2)!} = \frac{n(n-1)(n-2)!}{(n-2)!} = n(n-1)
+  \end{equation}
+  %
+  As such we are looking for two integers, $n$, $n-1$ such that $n \cdot (n-1) =
+  90$. By inspection we see that $90 = 10 \cdot 9 = 10 (10 - 1)$, so $n=10$. We
+  also have that $90 = (-9)(-10) = -9(-9-1)$ so another solution is $n=-9$,
+  however I do not think we are counting negative solutions when dealing with
+  permutations.
+
+  Using \cref{eq:P(n2)} we have
+  %
+  \begin{equation*}
+    P(n, 2) = P(n, 3) \ \Leftrightarrow \ n(n-1) = n(n-1)(n-2)
+                      \ \Leftrightarrow \ n(n-1)(3 - n) = 0
+  \end{equation*}
+  %
+  So $n = 0$, $n = 1$ or $n = 3$.In the last step we simply factored out the
+  common term,
+  %
+  \begin{equation*}
+    n(n - 1) \cdot 1 - n(n-1) \cdot (n-2) = n(n-1) [1 - (n-2)] = n(n-1)(3 - n).
+  \end{equation*}
+  %
+  Again we use the idea from \cref{eq:P(n2)} to rewrite the equation
+  %
+  \begin{equation*}
+    2P(n, 2) + 50 = P(2n, 2) \ \Leftrightarrow \ 2 n(n-1) + 50 = 2n(2n-1)
+                               \Leftrightarrow \ 2 n^2 = 50
+  \end{equation*}
+  %
+  Since $ 50 = 2 \cdot 5^2$ we see by inspection that the solutions to the
+  equation above is $n = \pm 5$. Where again I am quite sure that we are only
+  interested in the positive solution.
+\end{answer}
+
+\begin{problem}[27]
+  \begin{subproblem}[2]
+    \label{subproblem:27b}
+    How many distinct paths are there from $(1, 0, 5)$ to $(8, 1, 7)$ in
+    Euclidian three-space if each more is one of the following types?
+    %
+    \begin{enumerate}
+        \item[(H):] $(x, y, z) \to (x + 1, y, z)$:
+        \item[(V):] $(x, y, z) \to (x, y + 1, z)$:
+        \item[(A):] $(x, y, z) \to (x, y, z + 1)$
+    \end{enumerate} 
+  \end{subproblem}
+\end{problem}
+
+\begin{answer}
+  Each path consists of $2$ H's, $1$ V and $7$ A's. There are
+  %
+  \begin{equation*}
+    \frac{10!}{2! \cdot 1! \cdot 7!} = 360
+  \end{equation*}
+  %
+  ways to arrange these $10$ letters, and this is the number of paths. 
+\end{answer}
+
+\begin{subproblem}
+  Generalize the results in \cref{subproblem:27b}.
+\end{subproblem}
+
+\begin{answer}
+  If $a$, $b$, and $c$ are any real numbers and $m$, $n$, $p$ are non-negative
+  integers, then the number of paths from $(a, b, c)$ to $(a + m, b + n, c \ p)$
+  is
+  %
+  \begin{equation*}
+    \frac{(m+n+p)!}{m! \cdot n! \cdot p!}
+  \end{equation*}
+\end{answer}
+
+\begin{problem}[36]
+  \begin{subproblem}
+    In how many ways can eight people, denoted $A$, $B$, $\ldots$, $H$ be seated
+    about the square table shown in \cref{fig:tables}. Where \cref{fig:table-a,fig:table-b} are
+    considered the same but are distinct from \cref{fig:table-c}?
+  \end{subproblem}
+\end{problem}
+
+\begin{figure}[htbp!]
+  \centering
+  \begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \labeledRectangle{3}{A}{B}{C}{D}{E}{F}{G}{H}
+    \caption{}
+    \label{fig:table-a}
+  \end{subfigure}
+  ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+  % (or a blank line to force the subfigure onto a new line)
+  \begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \labeledRectangle{3}{G}{H}{A}{B}{C}{D}{E}{F}
+    \caption{}
+    \label{fig:table-b}
+  \end{subfigure}
+  ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+  % (or a blank line to force the subfigure onto a new line)
+  \begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \labeledRectangle{3}{F}{G}{H}{A}{B}{C}{D}{E}
+    \caption{}
+    \label{fig:table-c}
+  \end{subfigure}
+  \caption{}\label{fig:tables}
+\end{figure}
+
+\begin{answer}
+  The exclusion of arrangements that can be obtained from rotation comes to the
+  same as the extra condition that $A$ is seated e.g. at the upper side. This
+  because in any case there is exactly one rotation that brings him there. Then
+  there are $2$ possibilities for $A$.  Now $B$ has $7$ possible seats
+  to choose from, $C$ has $6$ possible seats to choose from and so forth. In
+  total we have
+  %
+  \begin{equation*}
+    \text{\# Distinct table seatings for 8 people: } 2 \cdot 7! = 7\cdot 6 \cdots 2\cdot 2 = 10080
+  \end{equation*}
+  %
+  Another way to obtain this answer is as follows: Ignoring symmetries and
+  rotations there are $8!$ ways to place $8$ persons around the table. If we
+  reflect the table around the $x$-axis, or $y$-axis we obtain the same table
+  placement. These are shown in \cref{fig:rotations}. So for every table placement, we have
+  $4$ identitcal positions. Thus, $8!/4 = 8\cdot 7!/4 = 2 \cdot 7!$ as before.
+\end{answer}
+
+\begin{Figure}[htbp!]
+  \centering
+  \begin{subfigure}[b]{0.25\textwidth}
+    \centering
+    \labeledRectangle{2}{A}{B}{C}{D}{E}{F}{G}{H}
+    \caption{No rotation}
+    \label{fig:no-rotation}
+  \end{subfigure}
+  ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+  % (or a blank line to force the subfigure onto a new line)
+  \begin{subfigure}[b]{0.25\textwidth}
+    \centering
+    \labeledRectangle{2}{F}{E}{D}{C}{B}{A}{H}{G}
+    \caption{Vertical}
+    \label{fig:x-rotation}
+  \end{subfigure}
+  
+  \begin{subfigure}[b]{0.25\textwidth}
+    \centering
+    \labeledRectangle{2}{B}{A}{H}{G}{F}{E}{D}{C}
+    \caption{Horizontal}
+    \label{fig:y-rotation}
+  \end{subfigure}
+  ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+  % (or a blank line to force the subfigure onto a new line)
+  \begin{subfigure}[b]{0.25\textwidth}
+    \centering
+    \labeledRectangle{2}{E}{F}{G}{H}{A}{B}{C}{D}
+    \caption{Horizontal \& vertical}
+    \label{fig:xy-rotation}
+  \end{subfigure}
+  \caption{The $4$ rotation symmetries}\label{fig:rotations}
+\end{Figure}
+
+
+\begin{subproblem}
+  If two of the eight people, say $A$ and $B$, do not get along well, how many
+  different seattings are possible with $A$ and $B$ not sitting next to each other?
+\end{subproblem}
+
+\begin{answer}
+  We begin as before by placing $A$. To avoid symmetries $A$ is once again
+  placed on the upper half of the table, and as such have $2$ seats to choose
+  from. Now as $B$ does not want to sit next to $A$ he only has $5$ seats to
+  choose from, while $C$ still has $6$. Continuing we get that the total number
+  of arrangements such that $A$ does not sit beside $B$ are
+  \begin{equation*}
+    \text{\# Arrangements such that $A$ does not sit beside $B$: } \quad
+    2 \cdot 5 \cdot 6 \cdot 5 \cdot 4 \cdot 3 \cdot 2 = 7200
+  \end{equation*}
+\end{answer}
+
+
+\seksjon{1.3}
+
+\begin{problem}[16]
+  Determine the value of each of the following summations,
+\end{problem}
+
+\begin{subproblem}[3]
+  $\displaystyle \sum_{i = 0}^{10} 1 + (-1)^i \ans{= (1 - 1) + (1 + 1) + \cdots
+    + (1 +
+  1) = 6 \cdot 2 = 12}$
+\end{subproblem}
+
+\begin{answer}
+  Notice in general that for every \emph{odd} $i = 2k+1$  then $1 + (-1)^{2k+1}
+  = 1 - 1 = 0$, and similarly for \emph{even} $i = 2k$ then $1 + (-1)^{2k} = 2$.
+  Let $n \in \N$ then in general we have
+  %
+  \begin{align*}
+    \sum_{i = 0}^{2n} 1 + (-1)^i
+    & = (1 - 1) + (1 + 1) + \cdots + (1 + 1) \\
+    & = \sum_{i = 0}^n (1 + (-1)^{2k-1}) + (1 + (-1)^{2k})
+    = \sum_{i = 0}^n (1 - 1) + (1 + 1)
+    = 2 (n + 1)
+  \end{align*}
+\end{answer}
+
+\begin{subproblem}
+  $\displaystyle \sum_{k = n}^{2n} (-1)^k$ where $n$ is an odd positive integer
+\end{subproblem}
+
+\begin{answer}
+  Notice that when $k$ is odd we have $(-1)^k = - 1$ and $(-1)^{k} = 1$ when $k$
+  is even. Thus, every other term cancel each other out. Since $n$ is odd we
+  will always sum an even number of terms, so the sum is zero.
+  %
+  \begin{align*}
+    \sum_{k=n}^{2n} (-1)^k
+    & = (-1)^{n} + (-1)^{n+1} + \cdots + (-1)^{2n-1} + (-1)^{2n} \\
+    & = (-1 + 1) + (-1 + 1) + \cdots + (-1 + 1)
+      = 0
+  \end{align*}
+  %
+  the first term $(-1)^n$ is negative because $n$ is \emph{odd}.
+\end{answer}
+
+\begin{subproblem}
+  $\displaystyle \sum_{i = 1}^{6} i(-1)^i \ans{= 1(-1)^1 + 2(-1)^2 + \cdots + 
+    6(-1)^6 = -1 + 2 - 3 + 4 - 5 + 6 = 3}$
+\end{subproblem}
+
+\begin{answer}
+  Let $n \in \N$ then in general we have
+  %
+  \begin{align*}
+         \sum_{i = 1}^{2n} i(-1)^i
+     = & (-1 + 2) + (-3 + 4) + \cdots + \bigl[  (2k - 1) (-1)^{2k-1} + 2k(-1)^{2k}\bigr] \\
+     = & \sum_{k = 1}^{n} \bigr[ (2k-1)(-1)^{2k-1} + 2k(-1)^{2k}\bigl] 
+     =   \sum_{k = 1}^{n} \bigr[ (2k - 1)(-1) + 2k \bigl] 
+      =  \sum_{k = 1}^n 1
+      = n
+  \end{align*}
+\end{answer}
+
+\begin{problem}[25]
+  Determine the coefficient of
+  \begin{enumerate}[label = \textbf{\alph*)} ]
+    \item $xyz^2$ in $(x + y + z)^4$
+    \item $xyz^2$ in $(w + x + y+ z)^4$
+    \item $xyz^2$ in $(2x - y - z)^4$
+    \item $zyz^{-2}$ in $(x - 2y + 3z^{-1})^4$
+    \item $w^3x^2yz^2$ in $(2w - x + 3y - 2z)^{8}$
+  \end{enumerate} 
+\end{problem}
+
+\begin{answer}
+  For any positive integer $m$ and any nonnegative integer $n$, the multinomial
+  formula tells us how a sum with $m$ terms expands when raised to an arbitrary
+  power $n$:
+  % 
+  \begin{equation*}
+    (x_1 + x_2  + \cdots + x_m)^n 
+    = \sum_{k_1+k_2+\cdots+k_m=n} {n \choose k_1, k_2, \ldots, k_m}
+    \prod_{t=1}^m x_t^{k_t}\,,
+  \end{equation*}
+  where
+  % 
+  \begin{equation*}
+    \binom{n}{k_1, k_2, \ldots, k_m} = \frac{n!}{k_1!\, k_2! \cdots k_m!}
+  \end{equation*}
+  %
+  is a multinomial coefficient. The sum is taken over all combinations of
+  nonnegative integer indices $k_1$ through $k_m$ such that the sum of all $k_i$ is $n$.
+  That is, for each term in the expansion, the exponents of the $x_i$ must add up
+  to $n$.
+
+  \begin{enumerate}[label =\textbf{\alph*)}]
+    \item $xyz^2$ in $(x+y+z)^4$ has the coefficient $\displaystyle
+      \binom{4}{1,1,2} = \frac{4!}{1! \cdot 1! \cdot 2!} = 12$.
+    \item $xyz^2$ in $(w + x + y+ z)^4$ has the coefficient $\displaystyle
+      \binom{4}{0, 1, 1, 2} = \frac{4!}{0!\cdot 1! \cdot 1! \cdot 2!} = 12$.
+    \item $xyz^2$ in $(2x - y - z)^4$ has the coefficient $\displaystyle
+      \binom{4}{1,1,2} (2)(-1)(-1)^2= -\frac{4! \cdot 2}{1! \cdot 1! \cdot 2!} = -24$.
+    \item $zyz^{-2}$ in $(x - 2y + 3z^{-1})^4$ has the coefficient $\displaystyle
+      \binom{4}{1,1,2}(-2)(3)^2 = -\frac{4! \cdot 18}{1! \cdot 1! \cdot 2!} = 216$.
+    \item $w^3x^2yz^2$ in $(2w - x + 3y - 2z)^{8}$ has the coefficient $\displaystyle
+      \binom{8}{3,2,1,2} (2)^3 (-1)^2 (3)(-2)^2= \num{161280}$.
+  \end{enumerate}
+\end{answer}
+
+\newpageanswer
+
+\begin{problem}[33]
+  \begin{subproblem}[2]
+    \label{subproblem:33b}
+    Given a list $a_0, a_1, a_2, \ldots, a_n$ --- of $n+1$ real numbers, where
+    $n$ is a positive integer, determine
+    % 
+    \begin{equation*}
+      \sum_{i = 1}^{n} a_i - a_{i - 1}\,.
+    \end{equation*}
+  \end{subproblem}
+\end{problem}
+
+\begin{answer}
+  A series of this form is known as a
+  \href{https://en.wikipedia.org/wiki/Telescoping_series}{telescoping series}.
+  In mathematics, a \emph{telescoping series} is a series whose partial sums
+  eventually only have a fixed number of terms after cancellation. The
+  cancellation technique, with part of each term cancelling with part of the
+  next term, is known as the \emph{method of differences}.
+
+  In particular for the series above
+  %
+  \begin{align*}
+    \sum_{i = 1}^{n} a_i - a_{i - 1}
+    & = (a_1 - a_0) + (a_2 - a_1) + \cdots + (a_{n-1} + a_{n-2}) + (a_{n} - a_{n-1}) \\
+    & = - a_0 + (a_1 - a_1) + (a_2 - a_ 2) + \cdots (a_{n-1} - a_{n-1}) + a_n  \\
+    & = a_n - a_0
+  \end{align*}
+\end{answer}
+
+\begin{subproblem}
+  Determine the value of $ \ \ \displaystyle \sum_{i = 1}^{100} \frac{1}{i + 2} -
+  \frac{1}{i + 1}$.
+\end{subproblem}
+
+\begin{answer}
+  \noindent
+  This is a telescoping series with $a_i = 1/(i + 2)$. Using the result from
+  \cref{subproblem:33b} we obtain
+  %
+  \begin{equation*}
+        \sum_{i = 1}^{100} \frac{1}{i+2} - \frac{1}{i+1}
+    =   \frac{1}{100 + 2} - \frac{1}{0 + 2}
+    = - \frac{25}{51}.
+  \end{equation*}
+\end{answer}
+
+
+\seksjon{5.6}
+
+\begin{problem}[8]
+  Let $f \colon A \to B$, $g \colon B \to C$. Prove that
+  \begin{enumerate}[label = (\alph*)]
+    \item if $g \circ f \colon A \to C$ is onto, then $g$ is onto;
+    \item if $g \circ f \colon A \to C$ is one-to-one, then $f$ is one-to-one.
+  \end{enumerate}
+\end{problem}
+
+\begin{answer}
+  \begin{enumerate}[label = (\alph*)]
+    \item Assume that $g \circ f \colon A \to C$ is onto. The function $g \circ
+      f$ from the set $A$ to a set $C$ is onto, if for every element $y$ in the
+      codomain $C$ of $f$ there is at least one element $x$ in the domain $A$
+      such that $(g \circ f)(x) = y.$
+
+      In other words, if $y \in C$, there exists some element $x \in A$ such that
+      $(g \circ f)(x) = y$. Then $g(f(x)) = y$ with $f(x) \in B$, so $g$ is
+      onto.
+
+      \item Let $x, y \in A$ if $(g \circ f)(x) = (g \circ f)(y)$ implies that $x = y$ for
+      all pairs $x,y$ then $g \circ f$ is one-to-one. Now,
+      %
+      \begin{align*}
+        f(x) = f(y)
+        \ \Rightarrow \ g(f(x)) = g(f(y))
+        \ \Rightarrow \ (g \circ f)(x) = (g \circ f)(y)
+        \ \Rightarrow \ x = y,
+      \end{align*}
+      %
+      since $g \circ f$ is one-to-one. Which is what we wanted to prove.
+  \end{enumerate}
+\end{answer}
+
+\begin{problem}[17]
+  Let $f, g \colon \Z^+ \to \Z^+$ where for all $x \in \Z^+$, $f(x) = x + 1$ and
+  $g(x) = \max\{1, x - 1\}$, the maximum of $1$ and $x - 1$. 
+\end{problem}
+
+\begin{subproblem}
+  What is the range of $f$?
+\end{subproblem} 
+
+\begin{answer}
+  The range of a function $f$ is by definition
+  \begin{equation*}
+    \{y \mid \text{there exists an $x$ in the domain of $f$ such that} \ y = f(x)\}.
+  \end{equation*}
+  Since $x \in \Z^+$ and $f(x) = x + 1$, the range of $f$ is $\Z^+ / \{-1\} = \{2, 3, 4, \ldots\}$.
+\end{answer}
+
+\begin{answer}
+\end{answer}
+
+\begin{subproblem}
+  \label{subproblem:17b}
+  Is $f$ an onto function?
+\end{subproblem}
+
+\begin{answer}
+  A function $f$ from a set $\Z^+$ to a set $\Z^+$ is surjective (or onto), or a
+  surjection, if for every element $y$ in the codomain $\Z^+$ of $f$ there is at
+  least one element $x$ in the domain $\Z^+$ of $f$ such that $f(x) = y$.
+
+  \textbf{No.} Let $y = 1$, then there is no $x \in \Z$ such that $y = f(x)$. 
+\end{answer}
+
+\begin{answer}
+\end{answer}
+
+\begin{subproblem}
+  Is the function $f$ one-to-one?
+\end{subproblem} 
+
+\begin{answer}
+  An injective function or injection or one-to-one function is a function that
+  preserves distinctness: it never maps distinct elements of its domain to the
+  same element of its codomain. In other words, every element of the function's
+  codomain is the image of at most one element of its domain.
+
+  \textbf{Yes.} Let $x, y \in \Z^+$ if $f(x) = f(y)$ implies that $x = y$ for
+  all pairs $x,y$ then $f$ is one-to-one. This is equivalent with the definition
+  above
+  %
+  \begin{equation*}
+    f(x) = f(y) \ \Rightarrow \ x + 1 = y + 1 \ \Rightarrow \ x = y
+  \end{equation*}
+\end{answer}
+
+\begin{subproblem}
+  What is the range of $g$?
+\end{subproblem}
+
+\begin{answer}
+  Another equivalent way of writing the definition of $g$ is as follows:
+  %
+  \begin{equation*}
+    g(x) =
+    \begin{cases}
+      \phantom{x - }\;\,1 & \text{if} \ x = 0 \\
+      x - 1 & \text{otherwise} \\
+    \end{cases}
+  \end{equation*}
+  Perhaps it is easier to see from this definition that the range of $g$ is $\Z_+$.
+\end{answer}
+
+\begin{subproblem}
+  Is $g$ an onto function?
+\end{subproblem} 
+
+\begin{answer}
+  As the domain and codomain are the same, the function is onto. For every $y
+  \in \Z^+$ we can find a $x \in \Z^+$ such that $y = g(x)$.
+\end{answer}
+
+\begin{subproblem}
+  Is the function $g$ one-to-one?
+\end{subproblem} 
+
+\begin{answer}
+  \textbf{No.} Let $x, y \in \Z^+$ if $f(x) = f(y)$ implies that $x = y$ for
+  all pairs $x,y$ then $f$ is one-to-one. However as $f(1) = f(2) = 1$, $f$
+  is not one-to-one.
+\end{answer}
+
+\begin{subproblem}
+  \label{subproblem:17g}
+  Show that $g \circ f = 1_{\Z^+}$.
+\end{subproblem}
+
+\begin{answer}
+  % 
+  Using the definition above of $g$ we have that
+  % 
+  \begin{equation*}
+    g(f(x)) = \max\{1 ,f(x) - 1\} = \max\{1, (x+1)-1\} = \max\{1,x\} = x,
+  \end{equation*}
+  % 
+  since $x \in \Z^+$. This proves that $g \circ f = 1_{Z^+}$ as wanted.
+\end{answer}
+
+\begin{subproblem}
+  \label{subproblem:17h}
+  Determine $(f \circ g)(x)$ for $x = 2, 3, 4, 7, 12$ and $25$.
+\end{subproblem} 
+
+\begin{answer}
+  We have $(f \circ g)(x) = 1 + \max\{1, x - 1\}$. This gives the following table
+\end{answer}
+
+\begin{table}[htbp!]
+  \centering
+  \caption{Shows $f(g(x)) = 1 + \max\{1, x - 1\}$ for various values.}
+  \begin{tabular}{R | *{7}{R}}
+    \toprule
+    x \phantom{1.}  & 2 & 3 & 4 & 7 & 12 & 25 \\
+    \midrule
+    f(g(x)) & 2 & 3 & 4 & 7 & 12 & 25 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{subproblem}
+  Do the answers for \cref{subproblem:17b,subproblem:17g,subproblem:17h} contradict the result in
+  \hyperlink{thm:8}{Theorem 8}?
+\end{subproblem} 
+
+\begin{answer}
+  \textbf{No.} The functions $f$, $g$ are \emph{not} inverses of each other. The
+  calculations in \cref{subproblem:17h} may suggest that $f \circ g = 1_{Z^+}$
+  since $(f \circ g)(x) = x$ for $x \geq 2$. But we also find that
+  %
+  \begin{equation*}
+    (f \circ g)(1) = f(\max{1, 0}) = f(1) = 2,
+  \end{equation*}
+  %
+  so $(f \circ)(1) \neq 1$, and, consequently, $f \circ g \neq 1_{Z^+}$.
+\end{answer}
+
+\noindent
+\\\textbf{\hypertarget{thm:8}{Theorem 8:}} \textit{A function $f \colon A \to B$ is invertible if and only if it is
+  one-to-one and onto.}
+
+\end{document}
